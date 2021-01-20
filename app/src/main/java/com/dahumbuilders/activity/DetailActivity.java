@@ -1,4 +1,4 @@
-package com.dahumbuilders;
+package com.dahumbuilders.activity;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.dahumbuilders.R;
 import com.dahumbuilders.fragment.DetailFragment;
 import com.dahumbuilders.model.Summary;
 import com.google.gson.Gson;

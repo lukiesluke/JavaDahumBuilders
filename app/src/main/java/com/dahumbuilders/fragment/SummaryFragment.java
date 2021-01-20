@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.dahumbuilders.DetailActivity;
+import com.dahumbuilders.activity.DetailActivity;
 import com.dahumbuilders.R;
 import com.dahumbuilders.adapter.SummaryAdaptor;
 import com.dahumbuilders.model.ResponseSummary;
@@ -25,6 +25,7 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -99,7 +100,7 @@ public class SummaryFragment extends Fragment implements SummaryAdaptor.OnSummar
         Intent intent = new Intent(getActivity(), DetailActivity.class);
         intent.putExtra(DetailActivity.SUMMARY_KEY, summaryString);
         startActivity(intent);
-        getActivity().overridePendingTransition(R.xml.enter, R.xml.exit);
+        Objects.requireNonNull(getActivity()).overridePendingTransition(R.xml.enter, R.xml.exit);
 
         Log.d("lwg", summaryString);
     }

@@ -1,4 +1,4 @@
-package com.dahumbuilders;
+package com.dahumbuilders.activity;
 
 import android.os.Bundle;
 
@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.dahumbuilders.R;
 import com.dahumbuilders.adapter.MainViewPagerAdapter;
 import com.dahumbuilders.fragment.ProjectListFragment;
 import com.dahumbuilders.fragment.SummaryFragment;
