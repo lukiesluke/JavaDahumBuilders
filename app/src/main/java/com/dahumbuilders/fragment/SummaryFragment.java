@@ -31,32 +31,21 @@ import retrofit2.Response;
  * create an instance of this fragment.
  */
 public class SummaryFragment extends Fragment implements SummaryAdaptor.OnSummaryClickListener {
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+
     private SummaryAdaptor adapter;
     private List<Summary> summaryList = new ArrayList<>();
-    private String mParam1;
-    private String mParam2;
+
 
     public SummaryFragment() {
     }
 
-    public static SummaryFragment newInstance(String param1, String param2) {
-        SummaryFragment fragment = new SummaryFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    public static SummaryFragment newInstance() {
+        return new SummaryFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -68,7 +57,6 @@ public class SummaryFragment extends Fragment implements SummaryAdaptor.OnSummar
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
         fetchFromService();
-
         return view;
     }
 
