@@ -1,5 +1,6 @@
 package com.dahumbuilders.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,12 +13,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dahumbuilders.DetailActivity;
 import com.dahumbuilders.R;
 import com.dahumbuilders.adapter.SummaryAdaptor;
 import com.dahumbuilders.model.ResponseSummary;
 import com.dahumbuilders.model.Summary;
 import com.dahumbuilders.network.GetDataService;
 import com.dahumbuilders.network.RetrofitClientInstance;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +30,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SummaryFragment extends Fragment implements SummaryAdaptor.OnSummaryClickListener {
+
+    private Gson gson = new Gson();
     private SummaryAdaptor adapter;
     private List<Summary> summaryList = new ArrayList<>();
 
@@ -79,6 +84,12 @@ public class SummaryFragment extends Fragment implements SummaryAdaptor.OnSummar
     @Override
     public void itemClickedSummary(View view, int position) {
         Summary summary = (Summary) view.getTag();
-        Log.d("lwg", summary.datePaid + " " + summary.details.get(0).projName);
+        String summaryString = gson.toJson(summary);
+
+        Intent intent = new Intent(getActivity(), DetailActivity.class);
+        intent.putExtra(DetailActivity.SUMMARY_KEY, summaryString);
+        startActivity(intent);
+
+        Log.d("lwg", summaryString);
     }
 }
