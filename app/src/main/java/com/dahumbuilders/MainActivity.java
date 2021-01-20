@@ -1,6 +1,8 @@
 package com.dahumbuilders;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,8 +22,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
-    private RecyclerView recyclerView;
+public class MainActivity extends AppCompatActivity implements SummaryAdaptor.OnSummaryClickListener {
     private SummaryAdaptor adapter;
     private List<Summary> summaryList = new ArrayList<>();
 
@@ -29,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        recyclerView = findViewById(R.id.recycler);
+        RecyclerView recyclerView = findViewById(R.id.recycler);
 
-        adapter = new SummaryAdaptor();
+        adapter = new SummaryAdaptor(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         adapter.setSummary(summaryList);
@@ -45,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     summaryList = response.body().summary;
                     adapter.setSummary(response.body().summary);
+                } else {
+                    Toast.makeText(MainActivity.this, response.message(), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -53,5 +56,11 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void itemClickedSummary(View view, int position) {
+        Summary summary = (Summary) view.getTag();
+        Log.d("t",  summary.datePaid + " " + summary.expenses);
     }
 }

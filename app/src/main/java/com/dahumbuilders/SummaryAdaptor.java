@@ -9,16 +9,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.dahumbuilders.model.ResponseSummary;
 import com.dahumbuilders.model.Summary;
 
 import java.util.List;
 
 public class SummaryAdaptor extends RecyclerView.Adapter<SummaryAdaptor.ViewHolder> {
     private List<Summary> summaryList;
+    private OnSummaryClickListener onSummaryClickListener;
 
-    public SummaryAdaptor( ) {
-
+    public SummaryAdaptor(OnSummaryClickListener onSummaryClickListener) {
+        this.onSummaryClickListener = onSummaryClickListener;
     }
 
     public void setSummary(List<Summary> summaryList) {
@@ -49,14 +49,29 @@ public class SummaryAdaptor extends RecyclerView.Adapter<SummaryAdaptor.ViewHold
         return summaryList.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    public interface OnSummaryClickListener {
+        void itemClickedSummary(View view, int position);
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView date, totalCash, expenses;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            itemView.setOnClickListener(this);
             date = itemView.findViewById(R.id.txtDate);
             totalCash = itemView.findViewById(R.id.txtTotalCash);
             expenses = itemView.findViewById(R.id.txtExpenses);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (onSummaryClickListener != null) {
+                Summary summary = summaryList.get(getAdapterPosition());
+                v.setTag(summary);
+                onSummaryClickListener.itemClickedSummary(v, getAdapterPosition());
+            }
         }
     }
 }
