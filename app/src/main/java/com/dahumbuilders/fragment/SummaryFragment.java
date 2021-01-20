@@ -56,12 +56,7 @@ public class SummaryFragment extends Fragment implements SummaryAdaptor.OnSummar
         RecyclerView recyclerView = view.findViewById(R.id.recycler);
 
         swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                fetchFromService();
-            }
-        });
+        swipeRefreshLayout.setOnRefreshListener(this::fetchFromService);
 
         adapter = new SummaryAdaptor(summaryList, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
