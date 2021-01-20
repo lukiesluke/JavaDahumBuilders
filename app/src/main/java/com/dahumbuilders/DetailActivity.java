@@ -28,7 +28,7 @@ public class DetailActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
-        toolbar.setNavigationOnClickListener(v -> finish());
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -40,5 +40,11 @@ public class DetailActivity extends AppCompatActivity {
             appBarTitle.setText(getString(R.string.detail_title, summary.datePaid));
             Log.d("lwg", "DetailActivity: " + summary.datePaid);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.xml.left_to_right, R.xml.right_to_left);
     }
 }

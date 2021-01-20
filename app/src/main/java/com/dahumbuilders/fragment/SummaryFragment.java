@@ -99,6 +99,7 @@ public class SummaryFragment extends Fragment implements SummaryAdaptor.OnSummar
         Intent intent = new Intent(getActivity(), DetailActivity.class);
         intent.putExtra(DetailActivity.SUMMARY_KEY, summaryString);
         startActivity(intent);
+        getActivity().overridePendingTransition(R.xml.enter, R.xml.exit);
 
         Log.d("lwg", summaryString);
     }
