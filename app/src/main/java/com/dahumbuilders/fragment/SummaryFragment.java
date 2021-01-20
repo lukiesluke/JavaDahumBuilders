@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.dahumbuilders.DetailActivity;
 import com.dahumbuilders.R;
@@ -34,6 +35,8 @@ public class SummaryFragment extends Fragment implements SummaryAdaptor.OnSummar
     private Gson gson = new Gson();
     private SummaryAdaptor adapter;
     private List<Summary> summaryList = new ArrayList<>();
+    private SwipeRefreshLayout swipeRefreshLayout;
+
 
     public SummaryFragment() {
     }
@@ -52,6 +55,14 @@ public class SummaryFragment extends Fragment implements SummaryAdaptor.OnSummar
         View view = inflater.inflate(R.layout.fragment_summary, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.recycler);
 
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchFromService();
+            }
+        });
+
         adapter = new SummaryAdaptor(summaryList, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
@@ -67,16 +78,20 @@ public class SummaryFragment extends Fragment implements SummaryAdaptor.OnSummar
             @Override
             public void onResponse(@NonNull Call<ResponseSummary> call, @NonNull Response<ResponseSummary> response) {
                 if (response.isSuccessful()) {
-                    summaryList = response.body().summary;
-                    adapter.setSummary(response.body().summary);
+                    if (response.body() != null) {
+                        summaryList = response.body().summary;
+                        adapter.setSummary(response.body().summary);
+                    }
                 } else {
                     Toast.makeText(getActivity(), response.message(), Toast.LENGTH_SHORT).show();
                 }
+                swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
             public void onFailure(@NonNull Call<ResponseSummary> call, @NonNull Throwable t) {
                 Toast.makeText(getActivity(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
