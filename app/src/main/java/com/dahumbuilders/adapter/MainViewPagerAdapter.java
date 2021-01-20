@@ -34,8 +34,8 @@ public class MainViewPagerAdapter extends FragmentStatePagerAdapter {
         return stringList.get(position);
     }
 
-    public void addFragment(Fragment fragment, String title) {
-        fragmentList.add(fragment);
-        stringList.add(title);
+    public void addFragment(List<Fragment> fragment, List<String> list) {
+        this.fragmentList = fragment;
+        this.stringList = list;
     }
 }

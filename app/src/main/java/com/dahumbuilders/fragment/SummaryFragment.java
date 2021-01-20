@@ -1,6 +1,7 @@
 package com.dahumbuilders.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,16 +26,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SummaryFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class SummaryFragment extends Fragment implements SummaryAdaptor.OnSummaryClickListener {
-
     private SummaryAdaptor adapter;
     private List<Summary> summaryList = new ArrayList<>();
-
 
     public SummaryFragment() {
     }
@@ -84,6 +78,7 @@ public class SummaryFragment extends Fragment implements SummaryAdaptor.OnSummar
 
     @Override
     public void itemClickedSummary(View view, int position) {
-
+        Summary summary = (Summary) view.getTag();
+        Log.d("lwg", summary.datePaid + " " + summary.details.get(0).projName);
     }
 }
