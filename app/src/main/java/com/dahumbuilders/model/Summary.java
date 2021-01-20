@@ -4,66 +4,66 @@ import java.util.List;
 
 public class Summary {
     public String datePaid;
-    public double totalCash;
-    public double totalCheck;
-    public double totalBankTransfer;
-    public double expenses;
-    public double totalCashOnHand;
+    public String totalCash;
+    public String totalCheck;
+    public String totalBankTransfer;
+    public String expenses;
+    public String totalCashOnHand;
     public List<Details> details;
-
-    public String getDatePaid() {
-        return datePaid;
-    }
 
     public void setDatePaid(String datePaid) {
         this.datePaid = datePaid;
     }
 
-    public double getTotalCash() {
-        return totalCash;
-    }
-
-    public void setTotalCash(double totalCash) {
+    public void setTotalCash(String totalCash) {
         this.totalCash = totalCash;
     }
 
-    public double getTotalCheck() {
-        return totalCheck;
-    }
-
-    public void setTotalCheck(double totalCheck) {
+    public void setTotalCheck(String totalCheck) {
         this.totalCheck = totalCheck;
     }
 
-    public double getTotalBankTransfer() {
-        return totalBankTransfer;
-    }
-
-    public void setTotalBankTransfer(double totalBankTransfer) {
+    public void setTotalBankTransfer(String totalBankTransfer) {
         this.totalBankTransfer = totalBankTransfer;
     }
 
-    public double getExpenses() {
-        return expenses;
-    }
-
-    public void setExpenses(double expenses) {
+    public void setExpenses(String expenses) {
         this.expenses = expenses;
     }
 
-    public double getTotalCashOnHand() {
-        return totalCashOnHand;
-    }
-
-    public void setTotalCashOnHand(double totalCashOnHand) {
+    public void setTotalCashOnHand(String totalCashOnHand) {
         this.totalCashOnHand = totalCashOnHand;
-    }
-
-    public List<Details> getDetails() {
-        return details;
     }
 
     public void setDetails(List<Details> details) {
         this.details = details;
+    }
+
+    public String getDatePaid() {
+        return datePaid;
+    }
+
+    public String getTotalCash() {
+        return totalCash;
+    }
+
+    public String getTotalCheck() {
+        return totalCheck;
+    }
+
+    public String getTotalBankTransfer() {
+        return totalBankTransfer;
+    }
+
+    public String getExpenses() {
+        return expenses;
+    }
+
+    public String getTotalCashOnHand() {
+        return totalCashOnHand;
+    }
+
+    public List<Details> getDetails() {
+        return details;
     }
 }

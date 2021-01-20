@@ -6,7 +6,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.dahumbuilders.fragment.DetailFragment;
 import com.dahumbuilders.model.Summary;
 import com.google.gson.Gson;
 
@@ -19,7 +21,7 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        TextView textView = findViewById(R.id.appBarTitle);
+        TextView appBarTitle = findViewById(R.id.appBarTitle);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
@@ -31,7 +33,11 @@ public class DetailActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             Summary summary = gson.fromJson(bundle.getString(SUMMARY_KEY), Summary.class);
-            textView.setText(getString(R.string.detail_title, summary.datePaid));
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.your_placeholder, DetailFragment.newInstance(bundle.getString(SUMMARY_KEY)));
+            fragmentTransaction.commit();
+
+            appBarTitle.setText(getString(R.string.detail_title, summary.datePaid));
             Log.d("lwg", "DetailActivity: " + summary.datePaid);
         }
     }

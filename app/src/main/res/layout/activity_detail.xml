@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".DetailActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -23,4 +24,8 @@
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
+    <FrameLayout
+        android:id="@+id/your_placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>

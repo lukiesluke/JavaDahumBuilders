@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dahumbuilders.R;
+import com.dahumbuilders.Utils;
 import com.dahumbuilders.model.Summary;
 
 import java.util.List;
@@ -42,8 +43,8 @@ public class SummaryAdaptor extends RecyclerView.Adapter<SummaryAdaptor.ViewHold
         Summary current = summaryList.get(position);
 
         holder.date.setText(current.datePaid);
-        holder.totalCash.setText(current.totalCash + "");
-        holder.expenses.setText(current.expenses + "");
+        holder.totalCash.setText(Utils.format(current.totalCash));
+        holder.expenses.setText(Utils.format(current.expenses));
     }
 
     @Override

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="5dp"
+    tools:context=".fragment.DetailFragment">
+
+    <LinearLayout
+        android:id="@+id/lyDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:padding="1dp"
+            android:text="Date: " />
+
+        <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="1dp"
+            android:text="txtDate" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lyCash"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lyDate"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginRight="50dp"
+            android:padding="1dp"
+            android:text="Total Cash: " />
+
+        <TextView
+            android:id="@+id/txtTotalCash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginRight="50dp"
+            android:padding="1dp"
+            android:text="txtTotalCash" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lyCash"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginRight="50dp"
+            android:padding="1dp"
+            android:text="Total Expenses: " />
+
+        <TextView
+            android:id="@+id/txtExpenses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginRight="50dp"
+            android:padding="1dp"
+            android:text="txtExpenses" />
+    </LinearLayout>
+
+</RelativeLayout>
