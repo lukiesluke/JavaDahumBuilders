@@ -1,4 +1,4 @@
-package com.dahumbuilders;
+package com.dahumbuilders.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dahumbuilders.R;
 import com.dahumbuilders.model.Summary;
 
 import java.util.List;
@@ -17,7 +18,8 @@ public class SummaryAdaptor extends RecyclerView.Adapter<SummaryAdaptor.ViewHold
     private List<Summary> summaryList;
     private OnSummaryClickListener onSummaryClickListener;
 
-    public SummaryAdaptor(OnSummaryClickListener onSummaryClickListener) {
+    public SummaryAdaptor(List<Summary> summaryList, OnSummaryClickListener onSummaryClickListener) {
+        this.summaryList = summaryList;
         this.onSummaryClickListener = onSummaryClickListener;
     }
 
