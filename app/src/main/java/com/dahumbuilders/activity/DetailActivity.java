@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.dahumbuilders.R;
+import com.dahumbuilders.Utils;
 import com.dahumbuilders.fragment.DetailFragment;
 import com.dahumbuilders.model.Summary;
 import com.google.gson.Gson;
@@ -38,7 +39,7 @@ public class DetailActivity extends AppCompatActivity {
             fragmentTransaction.replace(R.id.your_placeholder, DetailFragment.newInstance(bundle.getString(SUMMARY_KEY)));
             fragmentTransaction.commit();
 
-            appBarTitle.setText(getString(R.string.detail_title, summary.datePaid));
+            appBarTitle.setText(getString(R.string.detail_title, Utils.stringToDate(summary.datePaid)));
             Log.d("lwg", "DetailActivity: " + summary.datePaid);
         }
     }

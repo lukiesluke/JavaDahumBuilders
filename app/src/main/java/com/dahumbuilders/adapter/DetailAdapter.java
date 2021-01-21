@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dahumbuilders.R;
+import com.dahumbuilders.Utils;
 import com.dahumbuilders.model.Detail;
 
 import java.util.List;
@@ -40,8 +41,8 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
         Detail detail = detailList.get(position);
 
         holder.projName.setText(detail.projName);
-        holder.totalCash.setText(detail.cash);
-        holder.totalExpenses.setText(detail.expenses);
+        holder.totalCash.setText(Utils.format(detail.cash));
+        holder.totalExpenses.setText(Utils.format(detail.expenses));
     }
 
     @Override

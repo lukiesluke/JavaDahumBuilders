@@ -42,7 +42,7 @@ public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Summary current = summaryList.get(position);
 
-        holder.date.setText(current.datePaid);
+        holder.date.setText(Utils.stringToDate(current.datePaid));
         holder.totalCash.setText(Utils.format(current.totalCash));
         holder.expenses.setText(Utils.format(current.expenses));
     }
