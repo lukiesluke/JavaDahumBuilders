@@ -22,11 +22,6 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
         this.detailList = detailList;
     }
 
-    public void setDetail(List<Detail> detailList) {
-        this.detailList = detailList;
-        notifyDataSetChanged();
-    }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
