@@ -9,7 +9,7 @@ public class Summary {
     public String totalBankTransfer;
     public String expenses;
     public String totalCashOnHand;
-    public List<Details> details;
+    public List<Detail> details;
 
     public void setDatePaid(String datePaid) {
         this.datePaid = datePaid;
@@ -35,7 +35,7 @@ public class Summary {
         this.totalCashOnHand = totalCashOnHand;
     }
 
-    public void setDetails(List<Details> details) {
+    public void setDetails(List<Detail> details) {
         this.details = details;
     }
 
@@ -63,7 +63,7 @@ public class Summary {
         return totalCashOnHand;
     }
 
-    public List<Details> getDetails() {
+    public List<Detail> getDetails() {
         return details;
     }
 }

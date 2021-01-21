@@ -1,6 +1,6 @@
 package com.dahumbuilders.model;
 
-public class Details {
+public class Detail {
     public String projName;
     public String cash;
     public String check;

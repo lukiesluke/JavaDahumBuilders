@@ -16,7 +16,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.dahumbuilders.activity.DetailActivity;
 import com.dahumbuilders.R;
-import com.dahumbuilders.adapter.SummaryAdaptor;
+import com.dahumbuilders.adapter.SummaryAdapter;
 import com.dahumbuilders.model.ResponseSummary;
 import com.dahumbuilders.model.Summary;
 import com.dahumbuilders.network.GetDataService;
@@ -31,10 +31,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SummaryFragment extends Fragment implements SummaryAdaptor.OnSummaryClickListener {
+public class SummaryFragment extends Fragment implements SummaryAdapter.OnSummaryClickListener {
 
     private Gson gson = new Gson();
-    private SummaryAdaptor adapter;
+    private SummaryAdapter adapter;
     private List<Summary> summaryList = new ArrayList<>();
     private SwipeRefreshLayout swipeRefreshLayout;
 
@@ -59,7 +59,7 @@ public class SummaryFragment extends Fragment implements SummaryAdaptor.OnSummar
         swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
         swipeRefreshLayout.setOnRefreshListener(this::fetchFromService);
 
-        adapter = new SummaryAdaptor(summaryList, this);
+        adapter = new SummaryAdapter(summaryList, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
         fetchFromService();

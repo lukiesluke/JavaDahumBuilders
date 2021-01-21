@@ -15,11 +15,11 @@ import com.dahumbuilders.model.Summary;
 
 import java.util.List;
 
-public class SummaryAdaptor extends RecyclerView.Adapter<SummaryAdaptor.ViewHolder> {
+public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.ViewHolder> {
     private List<Summary> summaryList;
     private OnSummaryClickListener onSummaryClickListener;
 
-    public SummaryAdaptor(List<Summary> summaryList, OnSummaryClickListener onSummaryClickListener) {
+    public SummaryAdapter(List<Summary> summaryList, OnSummaryClickListener onSummaryClickListener) {
         this.summaryList = summaryList;
         this.onSummaryClickListener = onSummaryClickListener;
     }

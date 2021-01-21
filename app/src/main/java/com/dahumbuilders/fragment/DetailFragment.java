@@ -7,17 +7,26 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.dahumbuilders.R;
 import com.dahumbuilders.Utils;
+import com.dahumbuilders.adapter.DetailAdapter;
+import com.dahumbuilders.model.Detail;
 import com.dahumbuilders.model.Summary;
 import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DetailFragment extends Fragment {
 
     private static final String ARG_DETAIL = "param1";
     private Gson gson = new Gson();
     private Summary summary = new Summary();
+    private DetailAdapter adapter;
+    private List<Detail> detailList = new ArrayList<>();
 
     public DetailFragment() {
     }
@@ -43,6 +52,7 @@ public class DetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
 
+        RecyclerView recyclerView = view.findViewById(R.id.recycler);
         TextView datePaid = view.findViewById(R.id.txtDate);
         TextView totalCash = view.findViewById(R.id.txtTotalCash);
         TextView totalExpenses = view.findViewById(R.id.txtExpenses);
@@ -50,6 +60,11 @@ public class DetailFragment extends Fragment {
         datePaid.setText(summary.datePaid);
         totalCash.setText(Utils.format(summary.totalCash));
         totalExpenses.setText(Utils.format(summary.expenses));
+        detailList = summary.details;
+
+        adapter = new DetailAdapter(detailList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setAdapter(adapter);
         return view;
     }
 }
