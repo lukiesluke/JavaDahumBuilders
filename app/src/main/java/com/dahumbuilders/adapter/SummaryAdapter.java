@@ -43,8 +43,10 @@ public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.ViewHold
         Summary current = summaryList.get(position);
 
         holder.date.setText(Utils.stringToDate(current.datePaid));
-        holder.totalCash.setText(Utils.format(current.totalCash));
+        holder.cash.setText(Utils.format(current.totalCash));
         holder.expenses.setText(Utils.format(current.expenses));
+        holder.check.setText(Utils.format(current.totalCheck));
+        holder.bankTransfer.setText(Utils.format(current.totalBankTransfer));
     }
 
     @Override
@@ -57,15 +59,17 @@ public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.ViewHold
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView date, totalCash, expenses;
+        private TextView date, cash, expenses, check, bankTransfer;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             itemView.setOnClickListener(this);
-            date = itemView.findViewById(R.id.txtDate);
-            totalCash = itemView.findViewById(R.id.txtTotalCash);
+            date = itemView.findViewById(R.id.txtDatePaid);
+            cash = itemView.findViewById(R.id.txtCash);
             expenses = itemView.findViewById(R.id.txtExpenses);
+            check = itemView.findViewById(R.id.txtCheck);
+            bankTransfer = itemView.findViewById(R.id.txtBankTransfer);
         }
 
         @Override

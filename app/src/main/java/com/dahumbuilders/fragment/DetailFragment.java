@@ -53,13 +53,18 @@ public class DetailFragment extends Fragment {
         SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
         RecyclerView recyclerView = view.findViewById(R.id.recycler);
 
-        TextView datePaid = view.findViewById(R.id.txtDate);
-        TextView totalCash = view.findViewById(R.id.txtTotalCash);
+        TextView datePaid = view.findViewById(R.id.txtDatePaid);
+        TextView totalCash = view.findViewById(R.id.txtCash);
         TextView totalExpenses = view.findViewById(R.id.txtExpenses);
+        TextView bankTransfer = view.findViewById(R.id.txtBankTransfer);
+        TextView check = view.findViewById(R.id.txtCheck);
 
         datePaid.setText(Utils.stringToDate(summary.datePaid));
         totalCash.setText(Utils.format(summary.totalCash));
         totalExpenses.setText(Utils.format(summary.expenses));
+        bankTransfer.setText(Utils.format(summary.totalBankTransfer));
+        check.setText(Utils.format(summary.totalCheck));
+
         List<Detail> detailList = summary.details;
 
         DetailAdapter adapter = new DetailAdapter(detailList);
