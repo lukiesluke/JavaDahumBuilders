@@ -1,6 +1,5 @@
 package com.dahumbuilders.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -36,25 +34,17 @@ import retrofit2.Response;
 
 import static com.dahumbuilders.network.Constant.PRE_KEY_SUMMARY;
 
-public class SummaryFragment extends Fragment implements SummaryAdapter.OnSummaryClickListener {
+public class SummaryFragment extends BaseFragment implements SummaryAdapter.OnSummaryClickListener {
 
-    private Gson gson = new Gson();
     private SummaryAdapter adapter;
     private List<Summary> summaryList = new ArrayList<>();
     private SwipeRefreshLayout swipeRefreshLayout;
-    private Context context;
 
     public SummaryFragment() {
     }
 
     public static SummaryFragment newInstance() {
         return new SummaryFragment();
-    }
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        this.context = context;
     }
 
     @Override

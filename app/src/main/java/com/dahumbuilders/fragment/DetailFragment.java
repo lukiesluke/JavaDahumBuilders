@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -16,15 +15,13 @@ import com.dahumbuilders.Utils;
 import com.dahumbuilders.adapter.DetailAdapter;
 import com.dahumbuilders.model.Detail;
 import com.dahumbuilders.model.Summary;
-import com.google.gson.Gson;
 
 import java.util.List;
 
-public class DetailFragment extends Fragment {
+public class DetailFragment extends BaseFragment {
 
     private static final String ARG_DETAIL = "param1";
     private Summary summary = new Summary();
-    private Gson gson = new Gson();
 
     public DetailFragment() {
     }
