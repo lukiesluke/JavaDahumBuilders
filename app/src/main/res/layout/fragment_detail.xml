@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@drawable/bg"
     android:orientation="vertical"
     tools:context=".fragment.DetailFragment">
 
@@ -28,7 +28,8 @@
                 android:gravity="center"
                 android:padding="2dp"
                 android:text="Summary Report"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -115,6 +116,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
                 android:orientation="horizontal"
                 android:weightSum="2">
 

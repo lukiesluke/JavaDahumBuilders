@@ -1,8 +1,8 @@
 package com.dahumbuilders.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,15 +14,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.dahumbuilders.activity.DetailActivity;
 import com.dahumbuilders.R;
+import com.dahumbuilders.Utils;
+import com.dahumbuilders.activity.DetailActivity;
 import com.dahumbuilders.adapter.SummaryAdapter;
 import com.dahumbuilders.model.ResponseSummary;
 import com.dahumbuilders.model.Summary;
 import com.dahumbuilders.network.GetDataService;
 import com.dahumbuilders.network.RetrofitClientInstance;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -31,19 +34,27 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.dahumbuilders.network.Constant.PRE_KEY_SUMMARY;
+
 public class SummaryFragment extends Fragment implements SummaryAdapter.OnSummaryClickListener {
 
     private Gson gson = new Gson();
     private SummaryAdapter adapter;
     private List<Summary> summaryList = new ArrayList<>();
     private SwipeRefreshLayout swipeRefreshLayout;
-
+    private Context context;
 
     public SummaryFragment() {
     }
 
     public static SummaryFragment newInstance() {
         return new SummaryFragment();
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.context = context;
     }
 
     @Override
@@ -77,6 +88,7 @@ public class SummaryFragment extends Fragment implements SummaryAdapter.OnSummar
                     if (response.body() != null) {
                         summaryList = response.body().summary;
                         adapter.setSummary(response.body().summary);
+                        Utils.putPref(context, PRE_KEY_SUMMARY, gson.toJson(summaryList));
                     }
                 } else {
                     Toast.makeText(getActivity(), response.message(), Toast.LENGTH_SHORT).show();
@@ -86,8 +98,15 @@ public class SummaryFragment extends Fragment implements SummaryAdapter.OnSummar
 
             @Override
             public void onFailure(@NonNull Call<ResponseSummary> call, @NonNull Throwable t) {
-                Toast.makeText(getActivity(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                String response = Utils.getPref(context, PRE_KEY_SUMMARY);
+                if (response.length() > 2) {
+                    Type listType = new TypeToken<ArrayList<Summary>>() {
+                    }.getType();
+                    List<Summary> summaryList = new Gson().fromJson(response, listType);
+                    adapter.setSummary(summaryList);
+                }
                 swipeRefreshLayout.setRefreshing(false);
+                Toast.makeText(getActivity(), "Something went wrong...Please try later!", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -101,7 +120,5 @@ public class SummaryFragment extends Fragment implements SummaryAdapter.OnSummar
         intent.putExtra(DetailActivity.SUMMARY_KEY, summaryString);
         startActivity(intent);
         Objects.requireNonNull(getActivity()).overridePendingTransition(R.xml.enter, R.xml.exit);
-
-        Log.d("lwg", summaryString);
     }
 }
