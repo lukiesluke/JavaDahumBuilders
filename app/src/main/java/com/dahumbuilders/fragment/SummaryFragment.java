@@ -46,7 +46,7 @@ public class SummaryFragment extends BaseFragment implements SummaryAdapter.OnSu
     private List<Summary> summaryList = new ArrayList<>();
     private SwipeRefreshLayout swipeRefreshLayout;
     private final FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    DatabaseReference databaseReference;
+    private DatabaseReference databaseReference;
 
     public SummaryFragment() {
     }
@@ -81,15 +81,15 @@ public class SummaryFragment extends BaseFragment implements SummaryAdapter.OnSu
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<Summary> sum = new ArrayList<>();
+                List<Summary> arrayList = new ArrayList<>();
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    sum.add(dataSnapshot.getValue(Summary.class));
+                    arrayList.add(dataSnapshot.getValue(Summary.class));
                 }
 
-                if (sum.size() > 0) {
+                if (arrayList.size() > 0) {
                     summaryList.clear();
-                    summaryList = sum;
+                    summaryList = arrayList;
                     adapter.setSummary(summaryList);
                     Utils.putPref(context, PRE_KEY_SUMMARY, gson.toJson(summaryList));
                 }

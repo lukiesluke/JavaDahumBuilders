@@ -17,7 +17,7 @@ import java.util.List;
 
 public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.ViewHolder> {
     private List<Summary> summaryList;
-    private OnSummaryClickListener onSummaryClickListener;
+    private final OnSummaryClickListener onSummaryClickListener;
 
     public SummaryAdapter(List<Summary> summaryList, OnSummaryClickListener onSummaryClickListener) {
         this.summaryList = summaryList;
@@ -59,7 +59,11 @@ public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.ViewHold
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView date, cash, expenses, check, bankTransfer;
+        private final TextView date;
+        private final TextView cash;
+        private final TextView expenses;
+        private final TextView check;
+        private final TextView bankTransfer;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

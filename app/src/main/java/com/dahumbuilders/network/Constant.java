@@ -9,4 +9,5 @@ public interface Constant {
     String PRE_KEY_SUMMARY = "key_summary";
 
     String FB_REF_SUMMARY = "summary";
+    String FB_REF_PROJECT = "project";
 }
