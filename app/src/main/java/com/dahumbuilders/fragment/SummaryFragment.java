@@ -20,8 +20,11 @@ import com.dahumbuilders.model.ResponseSummary;
 import com.dahumbuilders.model.Summary;
 import com.dahumbuilders.network.GetDataService;
 import com.dahumbuilders.network.RetrofitClientInstance;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -42,6 +45,8 @@ public class SummaryFragment extends BaseFragment implements SummaryAdapter.OnSu
     private SummaryAdapter adapter;
     private List<Summary> summaryList = new ArrayList<>();
     private SwipeRefreshLayout swipeRefreshLayout;
+    private final FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    DatabaseReference databaseReference;
 
     public SummaryFragment() {
     }
@@ -67,7 +72,35 @@ public class SummaryFragment extends BaseFragment implements SummaryAdapter.OnSu
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
         fetchFromService();
+        fetchFromFirebase();
         return view;
+    }
+
+    private void fetchFromFirebase() {
+        databaseReference = firebaseDatabase.getReference().child(FB_REF_SUMMARY);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Summary> sum = new ArrayList<>();
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    sum.add(dataSnapshot.getValue(Summary.class));
+                }
+
+                if (sum.size() > 0) {
+                    summaryList.clear();
+                    summaryList = sum;
+                    adapter.setSummary(summaryList);
+                    Utils.putPref(context, PRE_KEY_SUMMARY, gson.toJson(summaryList));
+                }
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void fetchFromService() {
@@ -83,8 +116,7 @@ public class SummaryFragment extends BaseFragment implements SummaryAdapter.OnSu
                         adapter.setSummary(summaryList);
                         Utils.putPref(context, PRE_KEY_SUMMARY, gson.toJson(summaryList));
 
-                        FirebaseDatabase database = FirebaseDatabase.getInstance();
-                        DatabaseReference databaseReference = database.getReference(FB_REF_SUMMARY);
+                        databaseReference = firebaseDatabase.getReference(FB_REF_SUMMARY);
                         databaseReference.setValue(summaryList);
                     }
                 } else {

@@ -15,7 +15,7 @@ import static com.dahumbuilders.network.Constant.PRE_NAME_DAHUM;
 
 public class Utils {
 
-    public static String format(String value) {
+    public static String format(Double value) {
         BigDecimal bigDecimal = new BigDecimal(value);
         DecimalFormat df = new DecimalFormat("#,##0.00");
         return df.format(bigDecimal);
