@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "284513481698",
+    "firebase_url": "https://dahum-builders-corporation-default-rtdb.firebaseio.com",
+    "project_id": "dahum-builders-corporation",
+    "storage_bucket": "dahum-builders-corporation.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:284513481698:android:d83048cfbb85d4df7a3fbb",
+        "android_client_info": {
+          "package_name": "com.dahumbuilders"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "284513481698-eg4fnfr7rrhe4tr7428r6s9c9qlo4mtc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATQcohlvKEuElmdFZdAC00yEQUYveBUvc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "284513481698-eg4fnfr7rrhe4tr7428r6s9c9qlo4mtc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

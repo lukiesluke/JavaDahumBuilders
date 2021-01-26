@@ -20,6 +20,8 @@ import com.dahumbuilders.model.ResponseSummary;
 import com.dahumbuilders.model.Summary;
 import com.dahumbuilders.network.GetDataService;
 import com.dahumbuilders.network.RetrofitClientInstance;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -32,6 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.dahumbuilders.network.Constant.FB_REF_SUMMARY;
 import static com.dahumbuilders.network.Constant.PRE_KEY_SUMMARY;
 
 public class SummaryFragment extends BaseFragment implements SummaryAdapter.OnSummaryClickListener {
@@ -77,8 +80,12 @@ public class SummaryFragment extends BaseFragment implements SummaryAdapter.OnSu
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
                         summaryList = response.body().summary;
-                        adapter.setSummary(response.body().summary);
+                        adapter.setSummary(summaryList);
                         Utils.putPref(context, PRE_KEY_SUMMARY, gson.toJson(summaryList));
+
+                        FirebaseDatabase database = FirebaseDatabase.getInstance();
+                        DatabaseReference databaseReference = database.getReference(FB_REF_SUMMARY);
+                        databaseReference.setValue(summaryList);
                     }
                 } else {
                     Toast.makeText(getActivity(), response.message(), Toast.LENGTH_SHORT).show();

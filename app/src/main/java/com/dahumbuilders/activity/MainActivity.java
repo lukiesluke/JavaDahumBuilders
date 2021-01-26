@@ -20,8 +20,8 @@ import static com.dahumbuilders.network.Constant.PROJECT;
 import static com.dahumbuilders.network.Constant.SUMMARY;
 
 public class MainActivity extends AppCompatActivity {
-    private List<Fragment> fragmentList = new ArrayList<>();
-    private List<String> stringList = new ArrayList<>();
+    private final List<Fragment> fragmentList = new ArrayList<>();
+    private final List<String> stringList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
