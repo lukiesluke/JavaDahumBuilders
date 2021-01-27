@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.dahumbuilders.network.Constant.FB_REF_PROJECT;
+import static com.dahumbuilders.network.Constant.FB_REF_PROJECT_TEST;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -82,7 +82,7 @@ public class ProjectListFragment extends Fragment {
     }
 
     private void fetchFromFirebase() {
-        databaseReference = firebaseDatabase.getReference().child(FB_REF_PROJECT);
+        databaseReference = firebaseDatabase.getReference().child(FB_REF_PROJECT_TEST);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

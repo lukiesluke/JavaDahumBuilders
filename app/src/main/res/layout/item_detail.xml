@@ -41,8 +41,7 @@
                     android:layout_height="wrap_content"
                     android:text="txtProjName"
                     android:textColor="@android:color/black"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                    android:textSize="17sp" />
 
             </LinearLayout>
 

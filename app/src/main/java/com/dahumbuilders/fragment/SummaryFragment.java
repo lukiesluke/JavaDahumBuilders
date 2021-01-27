@@ -38,6 +38,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.dahumbuilders.network.Constant.FB_REF_SUMMARY;
+import static com.dahumbuilders.network.Constant.FB_REF_SUMMARY_TEST;
 import static com.dahumbuilders.network.Constant.PRE_KEY_SUMMARY;
 
 public class SummaryFragment extends BaseFragment implements SummaryAdapter.OnSummaryClickListener {
@@ -67,17 +68,19 @@ public class SummaryFragment extends BaseFragment implements SummaryAdapter.OnSu
 
         swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
         swipeRefreshLayout.setOnRefreshListener(this::fetchFromService);
+        swipeRefreshLayout.setEnabled(false);
 
+        getSummaryListCachedFile();
         adapter = new SummaryAdapter(summaryList, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
-        fetchFromService();
+
         fetchFromFirebase();
         return view;
     }
 
     private void fetchFromFirebase() {
-        databaseReference = firebaseDatabase.getReference().child(FB_REF_SUMMARY);
+        databaseReference = firebaseDatabase.getReference().child(FB_REF_SUMMARY_TEST);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -138,6 +141,15 @@ public class SummaryFragment extends BaseFragment implements SummaryAdapter.OnSu
                 Toast.makeText(getActivity(), "Something went wrong...Please try later!", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void getSummaryListCachedFile() {
+        String cachedSummary = Utils.getPref(context, PRE_KEY_SUMMARY);
+        if (cachedSummary.length() > 2) {
+            Type listType = new TypeToken<ArrayList<Summary>>() {
+            }.getType();
+            summaryList = new Gson().fromJson(cachedSummary, listType);
+        }
     }
 
     @Override
