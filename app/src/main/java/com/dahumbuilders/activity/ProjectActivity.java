@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.dahumbuilders.R;
 import com.dahumbuilders.Utils;
@@ -30,7 +31,9 @@ public class ProjectActivity extends AppCompatActivity {
         appBarTitle.setTypeface(Utils.fontBold(getAssets()));
         TextView projectName = findViewById(R.id.txtProjectName);
         TextView projectAddress = findViewById(R.id.txtProjectAddress);
-
+        SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipeRefresh);
+        swipeRefreshLayout.setEnabled(false);
+        
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {

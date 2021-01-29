@@ -36,10 +36,10 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Lot lot = projectList.get(position);
-        holder.block.setText("" + lot.block);
-        holder.lot.setText("" + lot.lot);
-        holder.sqm.setText("" + lot.sqm);
-        holder.tcp.setText(Utils.format(lot.tcp));
+        holder.block.setText("Block: " + lot.block);
+        holder.lot.setText("Lot: " + lot.lot);
+        holder.sqm.setText("SQM: " + lot.sqm);
+        holder.tcp.setText("TCP: " + Utils.format(lot.tcp));
         holder.asignStat.setText("" + lot.assignStat);
 
     }
