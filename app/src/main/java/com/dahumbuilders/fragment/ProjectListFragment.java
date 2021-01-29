@@ -124,6 +124,6 @@ public class ProjectListFragment extends BaseFragment implements ProjectListAdap
     @Override
     public void itemClickedProjectName(View view, int position) {
         Project project = (Project) view.getTag();
-        Toast.makeText(getContext().getApplicationContext(), "Under maintenance: " + project.getProjName(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext().getApplicationContext(), "Project list is under maintenance: " + project.getProjName(), Toast.LENGTH_SHORT).show();
     }
 }
