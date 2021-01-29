@@ -1,6 +1,7 @@
 package com.dahumbuilders.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,9 @@ public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.ViewHold
     private List<Summary> summaryList;
     private final OnSummaryClickListener onSummaryClickListener;
 
+    protected Typeface tfRegular;
+    protected Typeface tfLight;
+
     public SummaryAdapter(List<Summary> summaryList, OnSummaryClickListener onSummaryClickListener) {
         this.summaryList = summaryList;
         this.onSummaryClickListener = onSummaryClickListener;
@@ -34,6 +38,10 @@ public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.ViewHold
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
+
+        tfRegular = Typeface.createFromAsset(context.getAssets(), "OpenSans-Regular.ttf");
+        tfLight = Typeface.createFromAsset(context.getAssets(), "OpenSans-Light.ttf");
+
         View view = inflater.inflate(R.layout.item_summary, parent, false);
         return new ViewHolder(view);
     }
@@ -74,6 +82,12 @@ public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.ViewHold
             expenses = itemView.findViewById(R.id.txtExpenses);
             check = itemView.findViewById(R.id.txtCheck);
             bankTransfer = itemView.findViewById(R.id.txtBankTransfer);
+
+            date.setTypeface(tfRegular);
+            cash.setTypeface(tfRegular);
+            expenses.setTypeface(tfLight);
+            check.setTypeface(tfLight);
+            bankTransfer.setTypeface(tfLight);
         }
 
         @Override

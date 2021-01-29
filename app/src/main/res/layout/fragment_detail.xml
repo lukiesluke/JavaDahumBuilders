@@ -23,6 +23,7 @@
             android:padding="5dp">
 
             <TextView
+                android:id="@+id/txtHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -153,14 +154,15 @@
             android:src="@drawable/ic_baseline_format_list_bulleted_24" />
 
         <TextView
+            android:id="@+id/txtLabelDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/card_view"
             android:layout_marginStart="5dp"
             android:layout_marginLeft="5dp"
             android:padding="5dp"
             android:text="Detail Report"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
     </LinearLayout>
 
 

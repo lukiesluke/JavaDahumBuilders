@@ -1,6 +1,7 @@
 package com.dahumbuilders.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import java.util.List;
 
 public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.ViewHolder> {
     private List<Project> projectList;
+    protected Typeface tfRegular;
+    protected Typeface tfLight;
 
     public ProjectListAdapter(List<Project> projectList) {
         this.projectList = projectList;
@@ -31,6 +34,10 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
+
+        tfRegular = Typeface.createFromAsset(context.getAssets(), "OpenSans-Regular.ttf");
+        tfLight = Typeface.createFromAsset(context.getAssets(), "OpenSans-Light.ttf");
+
         View view = inflater.inflate(R.layout.item_project, parent, false);
         return new ViewHolder(view);
     }
@@ -47,7 +54,7 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
         return projectList.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         TextView projectName;
         TextView address;
 
@@ -55,6 +62,9 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
             super(itemView);
             projectName = itemView.findViewById(R.id.txtProjName);
             address = itemView.findViewById(R.id.txtAddress);
+
+            projectName.setTypeface(tfRegular);
+            address.setTypeface(tfLight);
         }
     }
 }

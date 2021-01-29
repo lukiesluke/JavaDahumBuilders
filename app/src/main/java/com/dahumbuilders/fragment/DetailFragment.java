@@ -1,5 +1,6 @@
 package com.dahumbuilders.fragment;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,8 @@ public class DetailFragment extends BaseFragment {
 
     private static final String ARG_DETAIL = "param1";
     private Summary summary = new Summary();
+    protected Typeface tfBold;
+    protected Typeface tfRegular;
 
     public DetailFragment() {
     }
@@ -50,17 +53,30 @@ public class DetailFragment extends BaseFragment {
         SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
         RecyclerView recyclerView = view.findViewById(R.id.recycler);
 
+        tfBold = Typeface.createFromAsset(context.getAssets(), "OpenSans-Bold.ttf");
+        tfRegular = Typeface.createFromAsset(context.getAssets(), "OpenSans-Regular.ttf");
+
+        TextView header = view.findViewById(R.id.txtHeader);
         TextView datePaid = view.findViewById(R.id.txtDatePaid);
         TextView totalCash = view.findViewById(R.id.txtCash);
         TextView totalExpenses = view.findViewById(R.id.txtExpenses);
         TextView bankTransfer = view.findViewById(R.id.txtBankTransfer);
         TextView check = view.findViewById(R.id.txtCheck);
+        TextView labelDetail = view.findViewById(R.id.txtLabelDetail);
+
+        header.setTypeface(tfBold);
+        labelDetail.setTypeface(tfRegular);
 
         datePaid.setText(Utils.stringToDate(summary.datePaid));
+        datePaid.setTypeface(tfRegular);
         totalCash.setText(Utils.format(summary.totalCash));
+        totalCash.setTypeface(tfBold);
         totalExpenses.setText(Utils.format(summary.expenses));
+        totalExpenses.setTypeface(tfBold);
         bankTransfer.setText(Utils.format(summary.totalBankTransfer));
+        bankTransfer.setTypeface(tfBold);
         check.setText(Utils.format(summary.totalCheck));
+        check.setTypeface(tfBold);
 
         List<Detail> detailList = summary.details;
 
