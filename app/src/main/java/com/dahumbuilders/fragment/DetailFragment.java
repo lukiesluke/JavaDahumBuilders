@@ -16,13 +16,25 @@ import com.dahumbuilders.Utils;
 import com.dahumbuilders.adapter.DetailAdapter;
 import com.dahumbuilders.model.Detail;
 import com.dahumbuilders.model.Summary;
+import com.dahumbuilders.presenter.DetailPresenter;
+import com.dahumbuilders.presenter.IDetail;
 
 import java.util.List;
 
-public class DetailFragment extends BaseFragment {
+public class DetailFragment extends BaseFragment implements IDetail {
 
-    private static final String ARG_DETAIL = "param1";
+    private static final String ARG_DETAIL_REPORT = "param1";
     private Summary summary = new Summary();
+    private DetailPresenter presenter;
+    private RecyclerView recyclerView;
+    private TextView header;
+    private TextView datePaid;
+    private TextView totalCash;
+    private TextView totalExpenses;
+    private TextView bankTransfer;
+    private TextView check;
+    private TextView labelDetail;
+
     protected Typeface tfBold;
     protected Typeface tfRegular;
 
@@ -32,7 +44,7 @@ public class DetailFragment extends BaseFragment {
     public static DetailFragment newInstance(String detailReport) {
         DetailFragment fragment = new DetailFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_DETAIL, detailReport);
+        args.putString(ARG_DETAIL_REPORT, detailReport);
         fragment.setArguments(args);
         return fragment;
     }
@@ -41,8 +53,10 @@ public class DetailFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            String mDetailReport = getArguments().getString(ARG_DETAIL);
+            String mDetailReport = getArguments().getString(ARG_DETAIL_REPORT);
             summary = gson.fromJson(mDetailReport, Summary.class);
+        } else {
+            summary = new Summary();
         }
     }
 
@@ -51,22 +65,27 @@ public class DetailFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
 
         SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
-        RecyclerView recyclerView = view.findViewById(R.id.recycler);
+        swipeRefreshLayout.setEnabled(false);
+        recyclerView = view.findViewById(R.id.recycler);
 
         tfBold = Typeface.createFromAsset(context.getAssets(), "OpenSans-Bold.ttf");
         tfRegular = Typeface.createFromAsset(context.getAssets(), "OpenSans-Regular.ttf");
 
-        TextView header = view.findViewById(R.id.txtHeader);
-        TextView datePaid = view.findViewById(R.id.txtDatePaid);
-        TextView totalCash = view.findViewById(R.id.txtCash);
-        TextView totalExpenses = view.findViewById(R.id.txtExpenses);
-        TextView bankTransfer = view.findViewById(R.id.txtBankTransfer);
-        TextView check = view.findViewById(R.id.txtCheck);
-        TextView labelDetail = view.findViewById(R.id.txtLabelDetail);
+        header = view.findViewById(R.id.txtHeader);
+        datePaid = view.findViewById(R.id.txtDatePaid);
+        totalCash = view.findViewById(R.id.txtCash);
+        totalExpenses = view.findViewById(R.id.txtExpenses);
+        bankTransfer = view.findViewById(R.id.txtBankTransfer);
+        check = view.findViewById(R.id.txtCheck);
+        labelDetail = view.findViewById(R.id.txtLabelDetail);
 
-        header.setTypeface(tfBold);
-        labelDetail.setTypeface(tfRegular);
+        presenter = new DetailPresenter(getContext(), this);
+        presenter.ready();
+        return view;
+    }
 
+    @Override
+    public void init() {
         datePaid.setText(Utils.stringToDate(summary.datePaid));
         datePaid.setTypeface(tfRegular);
         totalCash.setText(Utils.format(summary.totalCash));
@@ -78,12 +97,12 @@ public class DetailFragment extends BaseFragment {
         check.setText(Utils.format(summary.totalCheck));
         check.setTypeface(tfBold);
 
-        List<Detail> detailList = summary.details;
+        header.setTypeface(tfBold);
+        labelDetail.setTypeface(tfRegular);
 
+        List<Detail> detailList = summary.details;
         DetailAdapter adapter = new DetailAdapter(detailList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
-        swipeRefreshLayout.setEnabled(false);
-        return view;
     }
 }
