@@ -14,7 +14,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.dahumbuilders.R;
 import com.dahumbuilders.activity.ProjectActivity;
-import com.dahumbuilders.adapter.ProjectListAdapter;
+import com.dahumbuilders.adapter.ProjectAdapter;
 import com.dahumbuilders.model.Project;
 import com.dahumbuilders.presenter.IPresenter;
 import com.dahumbuilders.presenter.ProjectPresenter;
@@ -27,14 +27,14 @@ import java.util.Objects;
  * Use the {@link ProjectListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProjectListFragment extends BaseFragment implements ProjectListAdapter.OnProjectNameClickListener, IPresenter {
+public class ProjectListFragment extends BaseFragment implements ProjectAdapter.OnProjectNameClickListener, IPresenter {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     private String mParam1;
     private String mParam2;
 
-    private ProjectListAdapter adapter;
+    private ProjectAdapter adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
     private ProjectPresenter presenter;
     private RecyclerView recyclerView;
@@ -76,7 +76,7 @@ public class ProjectListFragment extends BaseFragment implements ProjectListAdap
     public void init() {
         swipeRefreshLayout.setEnabled(false);
 
-        adapter = new ProjectListAdapter(presenter.getProjectListCachedFile(), this);
+        adapter = new ProjectAdapter(presenter.getProjectListCachedFile(), this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
         presenter.requestFromFirebase();

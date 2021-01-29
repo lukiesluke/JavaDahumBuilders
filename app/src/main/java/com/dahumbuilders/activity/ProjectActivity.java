@@ -6,14 +6,19 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.dahumbuilders.R;
 import com.dahumbuilders.Utils;
+import com.dahumbuilders.adapter.ProjectListAdapter;
 import com.dahumbuilders.model.Project;
 import com.google.gson.Gson;
 
 public class ProjectActivity extends AppCompatActivity {
     public static final String KEY_PROJECT = "key_project";
+    private ProjectListAdapter adapter;
+
     private final Gson gson = new Gson();
 
     @Override
@@ -37,14 +42,16 @@ public class ProjectActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             Project project = gson.fromJson(bundle.getString(KEY_PROJECT), Project.class);
-//            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//            fragmentTransaction.replace(R.id.your_placeholder, DetailFragment.newInstance(bundle.getString(KEY_DETAIL)));
-//            fragmentTransaction.commit();
             projectName.setText(project.projName);
             projectName.setTypeface(Utils.fontRegular(getAssets()));
             projectAddress.setText(project.address);
             projectName.setTypeface(Utils.fontLight(getAssets()));
+
             Log.d("lwg", "Project Name: " + project.projName);
+            adapter = new ProjectListAdapter(project.projectList);
+            RecyclerView recyclerView = findViewById(R.id.recycler);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setAdapter(adapter);
         }
     }
 

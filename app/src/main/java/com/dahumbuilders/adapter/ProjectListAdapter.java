@@ -11,22 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.dahumbuilders.R;
 import com.dahumbuilders.Utils;
-import com.dahumbuilders.model.Project;
+import com.dahumbuilders.model.Lot;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.ViewHolder> {
-    private List<Project> projectList;
-    private OnProjectNameClickListener onProjectNameClickListener;
+    private List<Lot> projectList = new ArrayList<>();
 
-    public ProjectListAdapter(List<Project> projectList, OnProjectNameClickListener onProjectNameClickListener) {
+    public ProjectListAdapter(List<Lot> projectList) {
         this.projectList = projectList;
-        this.onProjectNameClickListener = onProjectNameClickListener;
-    }
-
-    public void setProject(List<Project> projectList) {
-        this.projectList = projectList;
-        notifyDataSetChanged();
     }
 
     @NonNull
@@ -35,15 +29,19 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        View view = inflater.inflate(R.layout.item_project, parent, false);
-        return new ViewHolder(view);
+        View view = inflater.inflate(R.layout.item_project_list, parent, false);
+        return new ProjectListAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Project project = projectList.get(position);
-        holder.projectName.setText(project.projName);
-        holder.address.setText(project.address);
+        Lot lot = projectList.get(position);
+        holder.block.setText("" + lot.block);
+        holder.lot.setText("" + lot.lot);
+        holder.sqm.setText("" + lot.sqm);
+        holder.tcp.setText(Utils.format(lot.tcp));
+        holder.asignStat.setText("" + lot.assignStat);
+
     }
 
     @Override
@@ -51,31 +49,20 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
         return projectList.size();
     }
 
-    public interface OnProjectNameClickListener {
-        void itemClickedProjectName(View view, int position);
-    }
-
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView projectName;
-        TextView address;
+    class ViewHolder extends RecyclerView.ViewHolder {
+        TextView block;
+        TextView lot;
+        TextView sqm;
+        TextView tcp;
+        TextView asignStat;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            projectName = itemView.findViewById(R.id.txtProjName);
-            address = itemView.findViewById(R.id.txtAddress);
-
-            itemView.setOnClickListener(this);
-            projectName.setTypeface(Utils.fontRegular(itemView.getContext()));
-            address.setTypeface(Utils.fontLight(itemView.getContext()));
-        }
-
-        @Override
-        public void onClick(View v) {
-            if (onProjectNameClickListener != null) {
-                Project project = projectList.get(getAdapterPosition());
-                v.setTag(project);
-                onProjectNameClickListener.itemClickedProjectName(v, getAdapterPosition());
-            }
+            block = itemView.findViewById(R.id.txtBlock);
+            lot = itemView.findViewById(R.id.txtLot);
+            sqm = itemView.findViewById(R.id.txtSqm);
+            tcp = itemView.findViewById(R.id.txtTcp);
+            asignStat = itemView.findViewById(R.id.txtAsignStat);
         }
     }
 }
