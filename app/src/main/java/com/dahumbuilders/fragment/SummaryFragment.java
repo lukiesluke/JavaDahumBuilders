@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.dahumbuilders.ISummary;
+import com.dahumbuilders.presenter.ISummary;
 import com.dahumbuilders.R;
-import com.dahumbuilders.SummaryPresenter;
+import com.dahumbuilders.presenter.SummaryPresenter;
 import com.dahumbuilders.activity.DetailActivity;
 import com.dahumbuilders.adapter.SummaryAdapter;
 import com.dahumbuilders.model.Summary;

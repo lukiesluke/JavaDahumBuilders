@@ -1,9 +1,10 @@
-package com.dahumbuilders;
+package com.dahumbuilders.presenter;
 
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import com.dahumbuilders.Utils;
 import com.dahumbuilders.model.ResponseSummary;
 import com.dahumbuilders.model.Summary;
 import com.dahumbuilders.network.GetDataService;
@@ -29,7 +30,6 @@ import static com.dahumbuilders.network.Constant.PRE_KEY_SUMMARY;
 
 public class SummaryPresenter {
     private final FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference databaseReference;
     private List<Summary> summaryList = new ArrayList<>();
     private final Gson gson = new Gson();
     private final Context context;
@@ -45,7 +45,7 @@ public class SummaryPresenter {
     }
 
     public void requestFromFirebase() {
-        databaseReference = firebaseDatabase.getReference().child(FB_REF_SUMMARY_TEST);
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child(FB_REF_SUMMARY_TEST);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

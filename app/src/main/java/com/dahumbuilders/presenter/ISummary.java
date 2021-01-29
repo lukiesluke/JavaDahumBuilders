@@ -1,4 +1,4 @@
-package com.dahumbuilders;
+package com.dahumbuilders.presenter;
 
 import com.dahumbuilders.model.Summary;
 
