@@ -7,6 +7,7 @@ public interface Constant {
 
     String PRE_NAME_DAHUM = "dahum_builders";
     String PRE_KEY_SUMMARY = "key_summary";
+    String PRE_KEY_PROJECT = "key_project";
 
     String FB_REF_SUMMARY = "summary";
     String FB_REF_SUMMARY_TEST = "summaryTest";

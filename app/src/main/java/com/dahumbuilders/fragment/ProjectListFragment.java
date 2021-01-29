@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.dahumbuilders.R;
+import com.dahumbuilders.Utils;
 import com.dahumbuilders.adapter.ProjectListAdapter;
 import com.dahumbuilders.model.Project;
 import com.google.firebase.database.DataSnapshot;
@@ -19,18 +21,22 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.dahumbuilders.network.Constant.FB_REF_PROJECT_TEST;
+import static com.dahumbuilders.network.Constant.PRE_KEY_PROJECT;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ProjectListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProjectListFragment extends Fragment {
+public class ProjectListFragment extends BaseFragment implements ProjectListAdapter.OnProjectNameClickListener {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -73,7 +79,8 @@ public class ProjectListFragment extends Fragment {
         swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
 
         swipeRefreshLayout.setEnabled(false);
-        adapter = new ProjectListAdapter(projectList);
+        getProjectListCachedFile();
+        adapter = new ProjectListAdapter(projectList, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
 
@@ -90,7 +97,12 @@ public class ProjectListFragment extends Fragment {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     arrayList.add(dataSnapshot.getValue(Project.class));
                 }
-                adapter.setProject(arrayList);
+                if (arrayList.size() > 0) {
+                    projectList.clear();
+                    projectList = arrayList;
+                    adapter.setProject(arrayList);
+                    Utils.putPref(context, PRE_KEY_PROJECT, gson.toJson(projectList));
+                }
             }
 
             @Override
@@ -98,5 +110,20 @@ public class ProjectListFragment extends Fragment {
 
             }
         });
+    }
+
+    private void getProjectListCachedFile() {
+        String cachedProject = Utils.getPref(context, PRE_KEY_PROJECT);
+        if (cachedProject.length() > 2) {
+            Type listType = new TypeToken<ArrayList<Project>>() {
+            }.getType();
+            projectList = new Gson().fromJson(cachedProject, listType);
+        }
+    }
+
+    @Override
+    public void itemClickedProjectName(View view, int position) {
+        Project project = (Project) view.getTag();
+        Toast.makeText(getContext().getApplicationContext(), "Under maintenance: " + project.getProjName(), Toast.LENGTH_SHORT).show();
     }
 }

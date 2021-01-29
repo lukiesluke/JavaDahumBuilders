@@ -98,7 +98,6 @@ public class SummaryFragment extends BaseFragment implements SummaryAdapter.OnSu
                 }
             }
 
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 

@@ -17,11 +17,13 @@ import java.util.List;
 
 public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.ViewHolder> {
     private List<Project> projectList;
+    private OnProjectNameClickListener onProjectNameClickListener;
     protected Typeface tfRegular;
     protected Typeface tfLight;
 
-    public ProjectListAdapter(List<Project> projectList) {
+    public ProjectListAdapter(List<Project> projectList, OnProjectNameClickListener onProjectNameClickListener) {
         this.projectList = projectList;
+        this.onProjectNameClickListener = onProjectNameClickListener;
     }
 
     public void setProject(List<Project> projectList) {
@@ -54,7 +56,11 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
         return projectList.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    public interface OnProjectNameClickListener {
+        void itemClickedProjectName(View view, int position);
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView projectName;
         TextView address;
 
@@ -63,8 +69,18 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
             projectName = itemView.findViewById(R.id.txtProjName);
             address = itemView.findViewById(R.id.txtAddress);
 
+            itemView.setOnClickListener(this);
             projectName.setTypeface(tfRegular);
             address.setTypeface(tfLight);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (onProjectNameClickListener != null) {
+                Project project = projectList.get(getAdapterPosition());
+                v.setTag(project);
+                onProjectNameClickListener.itemClickedProjectName(v, getAdapterPosition());
+            }
         }
     }
 }
