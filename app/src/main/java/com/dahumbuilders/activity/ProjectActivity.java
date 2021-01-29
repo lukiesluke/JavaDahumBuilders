@@ -33,7 +33,7 @@ public class ProjectActivity extends AppCompatActivity {
         TextView projectAddress = findViewById(R.id.txtProjectAddress);
         SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipeRefresh);
         swipeRefreshLayout.setEnabled(false);
-        
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
