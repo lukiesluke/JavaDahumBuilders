@@ -6,4 +6,5 @@
     <string name="detail_title">Detail Report</string>
     <string name="project_list">Project List</string>
     <string name="detail_list">Detail list</string>
+    <string name="summary_report">Summary Report</string>
 </resources>

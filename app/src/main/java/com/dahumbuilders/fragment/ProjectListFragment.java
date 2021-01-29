@@ -93,7 +93,7 @@ public class ProjectListFragment extends BaseFragment implements ProjectListAdap
         String projectString = gson.toJson(project);
 
         Intent intent = new Intent(getActivity(), ProjectActivity.class);
-        intent.putExtra(ProjectActivity.KEY_DETAIL, projectString);
+        intent.putExtra(ProjectActivity.KEY_PROJECT, projectString);
         startActivity(intent);
         Objects.requireNonNull(getActivity()).overridePendingTransition(R.xml.enter, R.xml.exit);
         Toast.makeText(getContext().getApplicationContext(), "Project list is under maintenance: " + project.getProjName(), Toast.LENGTH_SHORT).show();
