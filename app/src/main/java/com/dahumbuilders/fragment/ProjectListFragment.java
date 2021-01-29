@@ -6,37 +6,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.dahumbuilders.R;
-import com.dahumbuilders.Utils;
 import com.dahumbuilders.adapter.ProjectListAdapter;
 import com.dahumbuilders.model.Project;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.dahumbuilders.presenter.IPresenter;
+import com.dahumbuilders.presenter.ProjectPresenter;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.dahumbuilders.network.Constant.FB_REF_PROJECT_TEST;
-import static com.dahumbuilders.network.Constant.PRE_KEY_PROJECT;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ProjectListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProjectListFragment extends BaseFragment implements ProjectListAdapter.OnProjectNameClickListener {
+public class ProjectListFragment extends BaseFragment implements ProjectListAdapter.OnProjectNameClickListener, IPresenter {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -44,10 +32,9 @@ public class ProjectListFragment extends BaseFragment implements ProjectListAdap
     private String mParam2;
 
     private ProjectListAdapter adapter;
-    private List<Project> projectList = new ArrayList<>();
     private SwipeRefreshLayout swipeRefreshLayout;
-    private final FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference databaseReference;
+    private ProjectPresenter presenter;
+    private RecyclerView recyclerView;
 
     public ProjectListFragment() {
     }
@@ -74,51 +61,27 @@ public class ProjectListFragment extends BaseFragment implements ProjectListAdap
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_project_list, container, false);
-
-        RecyclerView recyclerView = view.findViewById(R.id.recycler);
+        recyclerView = view.findViewById(R.id.recycler);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
 
-        swipeRefreshLayout.setEnabled(false);
-        getProjectListCachedFile();
-        adapter = new ProjectListAdapter(projectList, this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(adapter);
-
-        fetchFromFirebase();
+        presenter = new ProjectPresenter(getContext(), this);
+        presenter.ready();
         return view;
     }
 
-    private void fetchFromFirebase() {
-        databaseReference = firebaseDatabase.getReference().child(FB_REF_PROJECT_TEST);
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<Project> arrayList = new ArrayList<>();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    arrayList.add(dataSnapshot.getValue(Project.class));
-                }
-                if (arrayList.size() > 0) {
-                    projectList.clear();
-                    projectList = arrayList;
-                    adapter.setProject(arrayList);
-                    Utils.putPref(context, PRE_KEY_PROJECT, gson.toJson(projectList));
-                }
-            }
+    @Override
+    public void init() {
+        swipeRefreshLayout.setEnabled(false);
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        adapter = new ProjectListAdapter(presenter.getProjectListCachedFile(), this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setAdapter(adapter);
+        presenter.requestFromFirebase();
     }
 
-    private void getProjectListCachedFile() {
-        String cachedProject = Utils.getPref(context, PRE_KEY_PROJECT);
-        if (cachedProject.length() > 2) {
-            Type listType = new TypeToken<ArrayList<Project>>() {
-            }.getType();
-            projectList = new Gson().fromJson(cachedProject, listType);
-        }
+    @Override
+    public void requestFirebaseOnDataChange(List<Project> projectList) {
+        adapter.setProject(projectList);
     }
 
     @Override
