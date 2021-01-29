@@ -3,6 +3,8 @@ package com.dahumbuilders;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -14,6 +16,30 @@ import java.util.Objects;
 import static com.dahumbuilders.network.Constant.PRE_NAME_DAHUM;
 
 public class Utils {
+
+    public static Typeface fontBold(AssetManager assets) {
+        return Typeface.createFromAsset(assets, "OpenSans-Bold.ttf");
+    }
+
+    public static Typeface fontBold(Context context) {
+        return Typeface.createFromAsset(context.getAssets(), "OpenSans-Bold.ttf");
+    }
+
+    public static Typeface fontRegular(AssetManager assets) {
+        return Typeface.createFromAsset(assets, "OpenSans-Regular.ttf");
+    }
+
+    public static Typeface fontRegular(Context context) {
+        return Typeface.createFromAsset(context.getAssets(), "OpenSans-Regular.ttf");
+    }
+
+    public static Typeface fontLight(AssetManager assets) {
+        return Typeface.createFromAsset(assets, "OpenSans-Light.ttf");
+    }
+
+    public static Typeface fontLight(Context context) {
+        return Typeface.createFromAsset(context.getAssets(), "OpenSans-Light.ttf");
+    }
 
     public static String format(Double value) {
         BigDecimal bigDecimal = new BigDecimal(value);

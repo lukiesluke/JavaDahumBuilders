@@ -1,5 +1,6 @@
 package com.dahumbuilders.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.dahumbuilders.R;
+import com.dahumbuilders.activity.ProjectActivity;
 import com.dahumbuilders.adapter.ProjectListAdapter;
 import com.dahumbuilders.model.Project;
 import com.dahumbuilders.presenter.IPresenter;
 import com.dahumbuilders.presenter.ProjectPresenter;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -87,6 +90,12 @@ public class ProjectListFragment extends BaseFragment implements ProjectListAdap
     @Override
     public void itemClickedProjectName(View view, int position) {
         Project project = (Project) view.getTag();
+        String projectString = gson.toJson(project);
+
+        Intent intent = new Intent(getActivity(), ProjectActivity.class);
+        intent.putExtra(ProjectActivity.KEY_DETAIL, projectString);
+        startActivity(intent);
+        Objects.requireNonNull(getActivity()).overridePendingTransition(R.xml.enter, R.xml.exit);
         Toast.makeText(getContext().getApplicationContext(), "Project list is under maintenance: " + project.getProjName(), Toast.LENGTH_SHORT).show();
     }
 }

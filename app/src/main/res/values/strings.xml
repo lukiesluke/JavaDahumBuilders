@@ -3,5 +3,7 @@
     <string name="titleApp">Dahum Builders</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="detail_title">Detail Report: %1$s</string>
+    <string name="detail_title">Detail Report</string>
+    <string name="project_list">Project List</string>
+    <string name="detail_list">Detail list</string>
 </resources>

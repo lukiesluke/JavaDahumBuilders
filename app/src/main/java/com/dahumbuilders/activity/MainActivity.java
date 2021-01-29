@@ -1,12 +1,14 @@
 package com.dahumbuilders.activity;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.dahumbuilders.R;
+import com.dahumbuilders.Utils;
 import com.dahumbuilders.adapter.MainViewPagerAdapter;
 import com.dahumbuilders.fragment.ProjectListFragment;
 import com.dahumbuilders.fragment.SummaryFragment;
@@ -27,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        TextView appBarTitle = findViewById(R.id.appBarTitle);
+        appBarTitle.setTypeface(Utils.fontBold(getAssets()));
 
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         ViewPager viewPager = findViewById(R.id.viewPager);

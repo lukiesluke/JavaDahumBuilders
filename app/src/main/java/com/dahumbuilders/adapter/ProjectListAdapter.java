@@ -1,7 +1,6 @@
 package com.dahumbuilders.adapter;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dahumbuilders.R;
+import com.dahumbuilders.Utils;
 import com.dahumbuilders.model.Project;
 
 import java.util.List;
@@ -18,8 +18,6 @@ import java.util.List;
 public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.ViewHolder> {
     private List<Project> projectList;
     private OnProjectNameClickListener onProjectNameClickListener;
-    protected Typeface tfRegular;
-    protected Typeface tfLight;
 
     public ProjectListAdapter(List<Project> projectList, OnProjectNameClickListener onProjectNameClickListener) {
         this.projectList = projectList;
@@ -36,9 +34,6 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-
-        tfRegular = Typeface.createFromAsset(context.getAssets(), "OpenSans-Regular.ttf");
-        tfLight = Typeface.createFromAsset(context.getAssets(), "OpenSans-Light.ttf");
 
         View view = inflater.inflate(R.layout.item_project, parent, false);
         return new ViewHolder(view);
@@ -70,8 +65,8 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
             address = itemView.findViewById(R.id.txtAddress);
 
             itemView.setOnClickListener(this);
-            projectName.setTypeface(tfRegular);
-            address.setTypeface(tfLight);
+            projectName.setTypeface(Utils.fontRegular(itemView.getContext()));
+            address.setTypeface(Utils.fontLight(itemView.getContext()));
         }
 
         @Override

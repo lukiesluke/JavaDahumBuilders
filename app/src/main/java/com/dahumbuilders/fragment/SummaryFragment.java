@@ -70,7 +70,7 @@ public class SummaryFragment extends BaseFragment implements SummaryAdapter.OnSu
         String summaryString = gson.toJson(summary);
 
         Intent intent = new Intent(getActivity(), DetailActivity.class);
-        intent.putExtra(DetailActivity.SUMMARY_KEY, summaryString);
+        intent.putExtra(DetailActivity.KEY_SUMMARY, summaryString);
         startActivity(intent);
         Objects.requireNonNull(getActivity()).overridePendingTransition(R.xml.enter, R.xml.exit);
     }
