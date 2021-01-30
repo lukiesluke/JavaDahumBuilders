@@ -13,11 +13,10 @@ import com.dahumbuilders.R;
 import com.dahumbuilders.Utils;
 import com.dahumbuilders.model.ProjectList;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.ViewHolder> {
-    private List<ProjectList> projectList;
+    private final List<ProjectList> projectList;
 
     public ProjectListAdapter(List<ProjectList> projectList) {
         this.projectList = projectList;
@@ -30,7 +29,7 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
         LayoutInflater inflater = LayoutInflater.from(context);
 
         View view = inflater.inflate(R.layout.item_project_list, parent, false);
-        return new ProjectListAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -40,7 +39,7 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
         holder.lot.setText("ProjectList: " + projectList.lot);
         holder.sqm.setText("SQM: " + projectList.sqm);
         holder.tcp.setText("TCP: " + Utils.format(projectList.tcp));
-        holder.asignStat.setText("" + projectList.assignStat);
+        holder.assignStat.setText("" + projectList.assignStat);
 
     }
 
@@ -49,12 +48,12 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
         return projectList.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         TextView block;
         TextView lot;
         TextView sqm;
         TextView tcp;
-        TextView asignStat;
+        TextView assignStat;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -62,7 +61,7 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
             lot = itemView.findViewById(R.id.txtLot);
             sqm = itemView.findViewById(R.id.txtSqm);
             tcp = itemView.findViewById(R.id.txtTcp);
-            asignStat = itemView.findViewById(R.id.txtAsignStat);
+            assignStat = itemView.findViewById(R.id.txtAsignStat);
         }
     }
 }
