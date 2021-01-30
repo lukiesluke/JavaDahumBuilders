@@ -1,6 +1,6 @@
 package com.dahumbuilders.model;
 
-public class Lot {
+public class ProjectList {
     public int block;
     public int lot;
     public int sqm;

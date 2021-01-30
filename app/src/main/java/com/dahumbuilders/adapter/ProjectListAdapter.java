@@ -11,15 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.dahumbuilders.R;
 import com.dahumbuilders.Utils;
-import com.dahumbuilders.model.Lot;
+import com.dahumbuilders.model.ProjectList;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.ViewHolder> {
-    private List<Lot> projectList = new ArrayList<>();
+    private List<ProjectList> projectList;
 
-    public ProjectListAdapter(List<Lot> projectList) {
+    public ProjectListAdapter(List<ProjectList> projectList) {
         this.projectList = projectList;
     }
 
@@ -35,12 +35,12 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Lot lot = projectList.get(position);
-        holder.block.setText("Block: " + lot.block);
-        holder.lot.setText("Lot: " + lot.lot);
-        holder.sqm.setText("SQM: " + lot.sqm);
-        holder.tcp.setText("TCP: " + Utils.format(lot.tcp));
-        holder.asignStat.setText("" + lot.assignStat);
+        ProjectList projectList = this.projectList.get(position);
+        holder.block.setText("Block: " + projectList.block);
+        holder.lot.setText("ProjectList: " + projectList.lot);
+        holder.sqm.setText("SQM: " + projectList.sqm);
+        holder.tcp.setText("TCP: " + Utils.format(projectList.tcp));
+        holder.asignStat.setText("" + projectList.assignStat);
 
     }
 

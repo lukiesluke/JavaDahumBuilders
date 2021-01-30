@@ -6,7 +6,7 @@ import java.util.List;
 public class Project {
     public String projName;
     public String address;
-    public List<Lot> projectList = new ArrayList<>();
+    public List<ProjectList> projectList = new ArrayList<>();
 
     public String getProjName() {
         return projName;
@@ -16,7 +16,7 @@ public class Project {
         return address;
     }
 
-    public List<Lot> getProjectList() {
+    public List<ProjectList> getProjectList() {
         return projectList;
     }
 }
