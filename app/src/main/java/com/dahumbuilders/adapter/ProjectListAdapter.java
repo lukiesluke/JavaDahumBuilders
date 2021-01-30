@@ -62,6 +62,12 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
             sqm = itemView.findViewById(R.id.txtSqm);
             tcp = itemView.findViewById(R.id.txtTcp);
             assignStat = itemView.findViewById(R.id.txtAsignStat);
+
+            block.setTypeface(Utils.fontLight(itemView.getContext()));
+            lot.setTypeface(Utils.fontLight(itemView.getContext()));
+            sqm.setTypeface(Utils.fontLight(itemView.getContext()));
+            tcp.setTypeface(Utils.fontLight(itemView.getContext()));
+            assignStat.setTypeface(Utils.fontLight(itemView.getContext()));
         }
     }
 }
