@@ -35,13 +35,16 @@
             android:id="@+id/txtProjectName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
             android:text="@string/app_name"
             android:textSize="14sp" />
 
         <TextView
             android:id="@+id/txtProjectAddress"
             android:layout_width="match_parent"
+
             android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
             android:text="@string/app_name"
             android:textSize="12sp" />
 
