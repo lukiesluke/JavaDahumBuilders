@@ -4,10 +4,11 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,9 +18,10 @@ import com.dahumbuilders.R;
 import com.dahumbuilders.Utils;
 import com.dahumbuilders.adapter.ProjectListAdapter;
 import com.dahumbuilders.model.Project;
+import com.dahumbuilders.network.Constant;
 import com.google.gson.Gson;
 
-public class ProjectActivity extends AppCompatActivity {
+public class ProjectActivity extends BaseActivity {
     public static final String KEY_PROJECT = "key_project";
     private ProjectListAdapter adapter;
     private EditText search;
@@ -32,10 +34,19 @@ public class ProjectActivity extends AppCompatActivity {
 
         TextView appBarTitle = findViewById(R.id.appBarTitle);
         appBarTitle.setTypeface(Utils.fontBold(getAssets()));
+
+        LinearLayout linearLayout = findViewById(R.id.layout_holder);
+        setupUI(linearLayout, ProjectActivity.this);
+
         TextView projectName = findViewById(R.id.txtProjectName);
         TextView projectAddress = findViewById(R.id.txtProjectAddress);
         search = findViewById(R.id.search);
         search.setTypeface(Utils.fontLight(getApplicationContext()));
+
+        Button clear = findViewById(R.id.btClear);
+        clear.setOnClickListener(v -> {
+            search.setText(Constant.EMPTY);
+        });
 
         SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipeRefresh);
         swipeRefreshLayout.setEnabled(false);
