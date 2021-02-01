@@ -1,7 +1,10 @@
 package com.dahumbuilders.activity;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +22,7 @@ import com.google.gson.Gson;
 public class ProjectActivity extends AppCompatActivity {
     public static final String KEY_PROJECT = "key_project";
     private ProjectListAdapter adapter;
-
+    private EditText search;
     private final Gson gson = new Gson();
 
     @Override
@@ -31,6 +34,9 @@ public class ProjectActivity extends AppCompatActivity {
         appBarTitle.setTypeface(Utils.fontBold(getAssets()));
         TextView projectName = findViewById(R.id.txtProjectName);
         TextView projectAddress = findViewById(R.id.txtProjectAddress);
+        search = findViewById(R.id.search);
+        search.setTypeface(Utils.fontLight(getApplicationContext()));
+
         SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipeRefresh);
         swipeRefreshLayout.setEnabled(false);
 
@@ -56,6 +62,23 @@ public class ProjectActivity extends AppCompatActivity {
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setAdapter(adapter);
         }
+
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     @Override

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,19 +15,23 @@ import com.dahumbuilders.R;
 import com.dahumbuilders.Utils;
 import com.dahumbuilders.model.Summary;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.ViewHolder> {
+public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.ViewHolder> implements Filterable {
     private List<Summary> summaryList;
+    private List<Summary> summaryListFilterable;
     private final OnSummaryClickListener onSummaryClickListener;
 
     public SummaryAdapter(List<Summary> summaryList, OnSummaryClickListener onSummaryClickListener) {
         this.summaryList = summaryList;
+        this.summaryListFilterable = summaryList;
         this.onSummaryClickListener = onSummaryClickListener;
     }
 
     public void setSummary(List<Summary> summaryList) {
         this.summaryList = summaryList;
+        this.summaryListFilterable = summaryList;
         notifyDataSetChanged();
     }
 
@@ -41,8 +47,7 @@ public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Summary current = summaryList.get(position);
-
+        Summary current = summaryListFilterable.get(position);
         holder.date.setText(Utils.stringToDate(current.datePaid));
         holder.cash.setText(Utils.format(current.totalCash));
         holder.expenses.setText(Utils.format(current.expenses));
@@ -52,7 +57,38 @@ public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return summaryList.size();
+        return summaryListFilterable.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+                if (charString.isEmpty()) {
+                    summaryListFilterable = summaryList;
+                } else {
+                    List<Summary> filterList = new ArrayList<>();
+                    for (Summary row : summaryList) {
+                        if (row.getDatePaid().toLowerCase().contains(charString.toLowerCase())) {
+                            filterList.add(row);
+                        }
+                    }
+                    summaryListFilterable = filterList;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = summaryListFilterable;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults filterResults) {
+                summaryListFilterable = (ArrayList<Summary>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     public interface OnSummaryClickListener {

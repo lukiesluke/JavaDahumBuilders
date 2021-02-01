@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -96,6 +95,5 @@ public class ProjectListFragment extends BaseFragment implements ProjectAdapter.
         intent.putExtra(ProjectActivity.KEY_PROJECT, projectString);
         startActivity(intent);
         Objects.requireNonNull(getActivity()).overridePendingTransition(R.xml.enter, R.xml.exit);
-        Toast.makeText(getContext().getApplicationContext(), "Project list is under maintenance: " + project.getProjName(), Toast.LENGTH_SHORT).show();
     }
 }

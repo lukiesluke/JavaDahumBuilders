@@ -7,4 +7,6 @@
     <string name="project_list">Project List</string>
     <string name="detail_list">Detail list</string>
     <string name="summary_report">Summary Report</string>
+    <string name="status">Status</string>
+    <string name="search_block">Search Block</string>
 </resources>
