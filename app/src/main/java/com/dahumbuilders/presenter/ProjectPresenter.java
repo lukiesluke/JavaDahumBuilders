@@ -39,6 +39,7 @@ public class ProjectPresenter {
 
     public void requestFromFirebase() {
         DatabaseReference databaseReference = firebaseDatabase.getReference().child(FB_REF_PROJECT_TEST);
+        databaseReference.keepSynced(true);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -46,11 +47,12 @@ public class ProjectPresenter {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     arrayList.add(dataSnapshot.getValue(Project.class));
                 }
+
                 if (arrayList.size() > 0) {
                     projectList.clear();
                     projectList = arrayList;
-                    Utils.putPref(context, PRE_KEY_PROJECT, gson.toJson(projectList));
                     view.requestFirebaseOnDataChange(projectList);
+                    Utils.putPref(context, PRE_KEY_PROJECT, gson.toJson(projectList));
                 }
             }
 

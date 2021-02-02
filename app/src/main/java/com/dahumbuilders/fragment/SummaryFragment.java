@@ -10,13 +10,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.dahumbuilders.presenter.ISummary;
 import com.dahumbuilders.R;
-import com.dahumbuilders.presenter.SummaryPresenter;
 import com.dahumbuilders.activity.DetailActivity;
 import com.dahumbuilders.adapter.SummaryAdapter;
 import com.dahumbuilders.model.Summary;
+import com.dahumbuilders.presenter.ISummary;
+import com.dahumbuilders.presenter.SummaryPresenter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,6 +27,7 @@ public class SummaryFragment extends BaseFragment implements SummaryAdapter.OnSu
     private SwipeRefreshLayout swipeRefreshLayout;
     private SummaryPresenter presenter;
     private RecyclerView recyclerView;
+    private final List<Summary> summaryList = new ArrayList<>();
 
     public SummaryFragment() {
     }
@@ -53,7 +55,9 @@ public class SummaryFragment extends BaseFragment implements SummaryAdapter.OnSu
     @Override
     public void init() {
         swipeRefreshLayout.setEnabled(false);
-        adapter = new SummaryAdapter(presenter.getSummaryListCachedFile(), this);
+
+        /*adapter = new SummaryAdapter(presenter.getSummaryListCachedFile(), this);*/
+        adapter = new SummaryAdapter(summaryList, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
         presenter.requestFromFirebase();

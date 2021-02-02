@@ -18,6 +18,7 @@ import com.dahumbuilders.model.Project;
 import com.dahumbuilders.presenter.IPresenter;
 import com.dahumbuilders.presenter.ProjectPresenter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -37,6 +38,7 @@ public class ProjectListFragment extends BaseFragment implements ProjectAdapter.
     private SwipeRefreshLayout swipeRefreshLayout;
     private ProjectPresenter presenter;
     private RecyclerView recyclerView;
+    private final List<Project> projectList = new ArrayList<>();
 
     public ProjectListFragment() {
     }
@@ -75,7 +77,8 @@ public class ProjectListFragment extends BaseFragment implements ProjectAdapter.
     public void init() {
         swipeRefreshLayout.setEnabled(false);
 
-        adapter = new ProjectAdapter(presenter.getProjectListCachedFile(), this);
+        /*adapter = new ProjectAdapter(presenter.getProjectListCachedFile(), this);*/
+        adapter = new ProjectAdapter(projectList, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
         presenter.requestFromFirebase();

@@ -46,6 +46,7 @@ public class SummaryPresenter {
 
     public void requestFromFirebase() {
         DatabaseReference databaseReference = firebaseDatabase.getReference().child(FB_REF_SUMMARY_TEST);
+        databaseReference.keepSynced(true);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -58,8 +59,8 @@ public class SummaryPresenter {
                 if (arrayList.size() > 0) {
                     summaryList.clear();
                     summaryList = arrayList;
-                    Utils.putPref(context, PRE_KEY_SUMMARY, gson.toJson(summaryList));
                     view.requestFirebaseOnDataChange(summaryList);
+                    Utils.putPref(context, PRE_KEY_SUMMARY, gson.toJson(summaryList));
                 }
             }
 
