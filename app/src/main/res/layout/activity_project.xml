@@ -66,6 +66,7 @@
                 android:autofillHints="Search Block"
                 android:background="@drawable/rounder_corner"
                 android:hint="@string/search_block"
+                android:inputType="number"
                 android:padding="10dp"
                 android:textSize="12sp" />
 
