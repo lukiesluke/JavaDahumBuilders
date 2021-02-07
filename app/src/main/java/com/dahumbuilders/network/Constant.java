@@ -13,4 +13,8 @@ public interface Constant {
     String FB_REF_SUMMARY_TEST = "summaryTest";
     String FB_REF_PROJECT = "project";
     String FB_REF_PROJECT_TEST = "projectTest";
+
+    String CHANNEL_ID = "channel_id";
+    String CHANNEL_NAME = "channel_name";
+    String CHANNEL_DESCRIPTION = "channel_description";
 }
