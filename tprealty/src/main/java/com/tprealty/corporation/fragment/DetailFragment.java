@@ -1,4 +1,4 @@
-package com.dahumbuilders.fragment;
+package com.tprealty.corporation.fragment;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -11,15 +11,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.dahumbuilders.R;
-import com.dahumbuilders.Utils;
-import com.dahumbuilders.adapter.DetailAdapter;
-import com.dahumbuilders.model.Detail;
-import com.dahumbuilders.model.Summary;
-import com.dahumbuilders.presenter.DetailPresenter;
-import com.dahumbuilders.presenter.IDetail;
+import com.tprealty.corporation.R;
+import com.tprealty.corporation.Utils;
+import com.tprealty.corporation.adapter.DetailAdapter;
+import com.tprealty.corporation.presenter.DetailPresenter;
+import com.tprealty.corporation.presenter.IDetail;
 
 import java.util.List;
+
+import model.Detail;
+import model.Summary;
 
 public class DetailFragment extends BaseFragment implements IDetail {
 

@@ -1,34 +1,34 @@
-package com.dahumbuilders.activity;
-
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
-import android.widget.Toast;
+package com.tprealty.corporation.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import com.dahumbuilders.R;
-import com.dahumbuilders.Utils;
-import com.dahumbuilders.adapter.MainViewPagerAdapter;
-import com.dahumbuilders.fragment.ProjectListFragment;
-import com.dahumbuilders.fragment.SummaryFragment;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.tprealty.corporation.R;
+import com.tprealty.corporation.Utils;
+import com.tprealty.corporation.adapter.MainViewPagerAdapter;
+import com.tprealty.corporation.fragment.SummaryFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.dahumbuilders.network.Constant.CHANNEL_NAME;
-import static com.dahumbuilders.network.Constant.EMPTY;
-import static com.dahumbuilders.network.Constant.PROJECT;
-import static com.dahumbuilders.network.Constant.SUMMARY;
+import static com.tprealty.corporation.network.Constant.CHANNEL_NAME;
+import static com.tprealty.corporation.network.Constant.EMPTY;
+import static com.tprealty.corporation.network.Constant.PROJECT;
+import static com.tprealty.corporation.network.Constant.SUMMARY;
 
 public class MainActivity extends AppCompatActivity {
+
     private final List<Fragment> fragmentList = new ArrayList<>();
     private final List<String> stringList = new ArrayList<>();
 
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         MainViewPagerAdapter viewPagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager(), 0);
 
         fragmentList.add(SummaryFragment.newInstance());
-        fragmentList.add(ProjectListFragment.newInstance(EMPTY, EMPTY));
+        fragmentList.add(SummaryFragment.newInstance());
         stringList.add(SUMMARY);
         stringList.add(PROJECT);
 

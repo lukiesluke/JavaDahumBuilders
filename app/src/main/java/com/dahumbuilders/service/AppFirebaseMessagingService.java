@@ -34,6 +34,5 @@ public class AppFirebaseMessagingService extends FirebaseMessagingService {
             AppNotificationManager.getInstance(getApplicationContext())
                     .displayNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
         }
-
     }
 }
