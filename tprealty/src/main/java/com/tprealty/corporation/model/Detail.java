@@ -1,4 +1,4 @@
-package model;
+package com.tprealty.corporation.model;
 
 public class Detail {
     public String projName;

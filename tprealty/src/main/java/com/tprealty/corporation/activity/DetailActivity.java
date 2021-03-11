@@ -13,7 +13,7 @@ import com.tprealty.corporation.R;
 import com.tprealty.corporation.Utils;
 import com.tprealty.corporation.fragment.DetailFragment;
 
-import model.Summary;
+import com.tprealty.corporation.model.Summary;
 
 public class DetailActivity extends AppCompatActivity {
     public static final String KEY_SUMMARY = "key_summary";

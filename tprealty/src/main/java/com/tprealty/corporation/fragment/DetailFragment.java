@@ -19,8 +19,8 @@ import com.tprealty.corporation.presenter.IDetail;
 
 import java.util.List;
 
-import model.Detail;
-import model.Summary;
+import com.tprealty.corporation.model.Detail;
+import com.tprealty.corporation.model.Summary;
 
 public class DetailFragment extends BaseFragment implements IDetail {
 

@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import model.Summary;
+import com.tprealty.corporation.model.Summary;
 
 public class SummaryFragment extends BaseFragment implements SummaryAdapter.OnSummaryClickListener, ISummary {
 

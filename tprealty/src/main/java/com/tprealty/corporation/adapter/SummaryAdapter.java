@@ -17,7 +17,7 @@ import com.tprealty.corporation.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Summary;
+import com.tprealty.corporation.model.Summary;
 
 public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.ViewHolder> implements Filterable {
     private List<Summary> summaryList;

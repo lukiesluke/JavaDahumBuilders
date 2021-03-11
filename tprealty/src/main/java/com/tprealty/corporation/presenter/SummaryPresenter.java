@@ -17,7 +17,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Summary;
+import com.tprealty.corporation.model.Summary;
 
 import static com.tprealty.corporation.network.Constant.FB_REF_SUMMARY_TEST;
 import static com.tprealty.corporation.network.Constant.PRE_KEY_SUMMARY;

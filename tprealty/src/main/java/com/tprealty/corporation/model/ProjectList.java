@@ -1,4 +1,4 @@
-package model;
+package com.tprealty.corporation.model;
 
 public class ProjectList {
     public int block;

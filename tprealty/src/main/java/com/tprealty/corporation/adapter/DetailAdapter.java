@@ -14,7 +14,7 @@ import com.tprealty.corporation.Utils;
 
 import java.util.List;
 
-import model.Detail;
+import com.tprealty.corporation.model.Detail;
 
 public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder> {
     private final List<Detail> detailList;

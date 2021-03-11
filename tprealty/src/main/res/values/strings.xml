@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">TPRealty</string>
     <string name="titleApp">TP Realty</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="detail_title">Detail Report</string>
+    <string name="project_list">Project List</string>
+    <string name="detail_list">Detail list</string>
+    <string name="summary_report">Summary Report</string>
+    <string name="status">Status</string>
+    <string name="search_block">Search Block</string>
 </resources>
