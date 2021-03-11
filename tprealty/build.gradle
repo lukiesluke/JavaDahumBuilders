@@ -20,7 +20,7 @@ android {
     signingConfigs {
         release {
 
-            storeFile file("$projectDir/dahum_keystore.jks")
+            storeFile file("$projectDir/tprealty_keystore.jks")
             keyAlias 'dahum'
             keyPassword '88888888'
             storePassword '88888888'

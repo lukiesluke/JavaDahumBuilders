@@ -1,4 +1,4 @@
-package com.dahumbuilders.fragment;
+package com.tprealty.corporation.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,27 +6,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.dahumbuilders.R;
-import com.dahumbuilders.activity.ProjectActivity;
-import com.dahumbuilders.adapter.ProjectAdapter;
-import com.dahumbuilders.model.Project;
-import com.dahumbuilders.presenter.IPresenter;
-import com.dahumbuilders.presenter.ProjectPresenter;
+import com.tprealty.corporation.R;
+import com.tprealty.corporation.activity.ProjectActivity;
+import com.tprealty.corporation.adapter.ProjectAdapter;
+import com.tprealty.corporation.model.Project;
+import com.tprealty.corporation.presenter.IPresenter;
+import com.tprealty.corporation.presenter.ProjectPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ProjectListFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class ProjectListFragment extends BaseFragment implements ProjectAdapter.OnProjectNameClickListener, IPresenter {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";

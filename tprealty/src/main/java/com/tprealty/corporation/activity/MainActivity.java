@@ -1,14 +1,14 @@
 package com.tprealty.corporation.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -17,6 +17,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.tprealty.corporation.R;
 import com.tprealty.corporation.Utils;
 import com.tprealty.corporation.adapter.MainViewPagerAdapter;
+import com.tprealty.corporation.fragment.ProjectListFragment;
 import com.tprealty.corporation.fragment.SummaryFragment;
 
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         MainViewPagerAdapter viewPagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager(), 0);
 
         fragmentList.add(SummaryFragment.newInstance());
-        fragmentList.add(SummaryFragment.newInstance());
+        fragmentList.add(ProjectListFragment.newInstance(EMPTY, EMPTY));
         stringList.add(SUMMARY);
         stringList.add(PROJECT);
 
