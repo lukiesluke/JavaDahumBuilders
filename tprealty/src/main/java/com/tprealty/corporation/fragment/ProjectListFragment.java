@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.tprealty.corporation.activity.MapsActivity;
 import com.tprealty.corporation.R;
 import com.tprealty.corporation.activity.ProjectActivity;
 import com.tprealty.corporation.adapter.ProjectAdapter;
@@ -90,7 +91,7 @@ public class ProjectListFragment extends BaseFragment implements ProjectAdapter.
         String projectString = gson.toJson(project);
 
         if (view.getId() == R.id.location) {
-            Intent intent = new Intent(getActivity(), ProjectActivity.class);
+            Intent intent = new Intent(getActivity(), MapsActivity.class);
             intent.putExtra(ProjectActivity.KEY_PROJECT, projectString);
             startActivity(intent);
             Objects.requireNonNull(getActivity()).overridePendingTransition(R.xml.enter, R.xml.exit);
