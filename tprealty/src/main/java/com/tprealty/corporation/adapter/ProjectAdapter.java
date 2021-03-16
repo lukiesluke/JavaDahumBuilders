@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -58,13 +59,17 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView projectName;
         TextView address;
+        ImageView location;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             projectName = itemView.findViewById(R.id.txtProjName);
             address = itemView.findViewById(R.id.txtAddress);
+            location = itemView.findViewById(R.id.location);
 
+            location.setOnClickListener(this);
             itemView.setOnClickListener(this);
+
             projectName.setTypeface(Utils.fontRegular(itemView.getContext()));
             address.setTypeface(Utils.fontLight(itemView.getContext()));
         }

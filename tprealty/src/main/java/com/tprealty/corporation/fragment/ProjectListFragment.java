@@ -89,9 +89,16 @@ public class ProjectListFragment extends BaseFragment implements ProjectAdapter.
         Project project = (Project) view.getTag();
         String projectString = gson.toJson(project);
 
-        Intent intent = new Intent(getActivity(), ProjectActivity.class);
-        intent.putExtra(ProjectActivity.KEY_PROJECT, projectString);
-        startActivity(intent);
-        Objects.requireNonNull(getActivity()).overridePendingTransition(R.xml.enter, R.xml.exit);
+        if (view.getId() == R.id.location) {
+            Intent intent = new Intent(getActivity(), ProjectActivity.class);
+            intent.putExtra(ProjectActivity.KEY_PROJECT, projectString);
+            startActivity(intent);
+            Objects.requireNonNull(getActivity()).overridePendingTransition(R.xml.enter, R.xml.exit);
+        } else {
+            Intent intent = new Intent(getActivity(), ProjectActivity.class);
+            intent.putExtra(ProjectActivity.KEY_PROJECT, projectString);
+            startActivity(intent);
+            Objects.requireNonNull(getActivity()).overridePendingTransition(R.xml.enter, R.xml.exit);
+        }
     }
 }

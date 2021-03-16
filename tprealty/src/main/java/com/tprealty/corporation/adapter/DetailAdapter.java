@@ -39,7 +39,6 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
 
         holder.projName.setText(detail.projName);
         holder.cash.setText(Utils.format(detail.cash));
-        holder.expenses.setText(Utils.format(detail.expenses));
         holder.bankTransfer.setText(Utils.format(detail.bankTransfer));
         holder.check.setText(Utils.format(detail.check));
     }
@@ -50,20 +49,18 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView projName, cash, expenses, bankTransfer, check;
+        TextView projName, cash, bankTransfer, check;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             projName = itemView.findViewById(R.id.txtProjName);
             cash = itemView.findViewById(R.id.txtCash);
-            expenses = itemView.findViewById(R.id.txtExpenses);
             bankTransfer = itemView.findViewById(R.id.txtBankTransfer);
             check = itemView.findViewById(R.id.txtCheck);
 
             projName.setTypeface(Utils.fontRegular(itemView.getContext()));
             cash.setTypeface(Utils.fontLight(itemView.getContext()));
-            expenses.setTypeface(Utils.fontLight(itemView.getContext()));
             bankTransfer.setTypeface(Utils.fontLight(itemView.getContext()));
             check.setTypeface(Utils.fontLight(itemView.getContext()));
         }

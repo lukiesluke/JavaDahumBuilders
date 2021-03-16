@@ -19,9 +19,8 @@ android {
 
     signingConfigs {
         release {
-
             storeFile file("$projectDir/tprealty_keystore.jks")
-            keyAlias 'dahum'
+            keyAlias 'TPRealty'
             keyPassword '88888888'
             storePassword '88888888'
         }
@@ -31,6 +30,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
