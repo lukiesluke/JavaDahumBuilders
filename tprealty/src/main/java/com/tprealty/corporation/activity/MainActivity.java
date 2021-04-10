@@ -68,8 +68,8 @@ public class MainActivity extends AppCompatActivity {
                         String token = task.getResult();
 
                         // Log and toast
-                        Log.w("lwg", "Hello toke: " + token);
-                        Toast.makeText(MainActivity.this, "Hello toke: " + token, Toast.LENGTH_LONG).show();
+//                        Log.w("lwg", "Hello toke: " + token);
+//                        Toast.makeText(MainActivity.this, "Hello toke: " + token, Toast.LENGTH_LONG).show();
                     }
                 });
 
