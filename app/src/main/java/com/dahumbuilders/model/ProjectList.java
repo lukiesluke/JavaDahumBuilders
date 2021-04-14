@@ -6,6 +6,7 @@ public class ProjectList {
     public int sqm;
     public double tcp;
     public int assignStat;
+    public String name;
 
     public int getBlock() {
         return block;
@@ -25,5 +26,9 @@ public class ProjectList {
 
     public int getAssignStat() {
         return assignStat;
+    }
+
+    public String getName() {
+        return name;
     }
 }

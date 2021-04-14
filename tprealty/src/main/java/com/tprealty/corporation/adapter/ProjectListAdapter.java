@@ -46,13 +46,16 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
         holder.lot.setText("Lot: " + projectList.lot);
         holder.sqm.setText("SQM: " + projectList.sqm);
         holder.tcp.setText("TCP: " + Utils.format(projectList.tcp));
+        holder.name.setText("Client Name: " + projectList.name);
 
         if (projectList.assignStat > 0) {
             holder.assignStat.setTextColor(holder.getContext().getResources().getColor(colorRed));
             holder.assignStat.setText("Not Available");
+            holder.name.setVisibility(View.VISIBLE);
         } else {
             holder.assignStat.setText("Available");
             holder.assignStat.setTextColor(holder.getContext().getResources().getColor(colorGreen));
+            holder.name.setVisibility(View.GONE);
         }
     }
 
@@ -109,6 +112,7 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
         TextView sqm;
         TextView tcp;
         TextView assignStat;
+        TextView name;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -117,12 +121,14 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
             sqm = itemView.findViewById(R.id.txtSqm);
             tcp = itemView.findViewById(R.id.txtTcp);
             assignStat = itemView.findViewById(R.id.txtAssignStat);
+            name = itemView.findViewById(R.id.txtName);
 
             block.setTypeface(Utils.fontRegular(itemView.getContext()));
             lot.setTypeface(Utils.fontRegular(itemView.getContext()));
             sqm.setTypeface(Utils.fontRegular(itemView.getContext()));
             tcp.setTypeface(Utils.fontRegular(itemView.getContext()));
             assignStat.setTypeface(Utils.fontRegular(itemView.getContext()));
+            name.setTypeface(Utils.fontRegular(itemView.getContext()));
         }
 
         public Context getContext() {
