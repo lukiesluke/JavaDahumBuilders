@@ -15,8 +15,8 @@ import com.dahumbuilders.model.Summary;
 import com.google.gson.Gson;
 
 public class DetailActivity extends AppCompatActivity {
-    public static final String SUMMARY_KEY = "summary_key";
-    private Gson gson = new Gson();
+    public static final String KEY_SUMMARY = "key_summary";
+    private final Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +24,9 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         TextView appBarTitle = findViewById(R.id.appBarTitle);
+        appBarTitle.setTypeface(Utils.fontBold(getAssets()));
+        appBarTitle.setText(getString(R.string.detail_title));
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
@@ -34,12 +37,10 @@ public class DetailActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            Summary summary = gson.fromJson(bundle.getString(SUMMARY_KEY), Summary.class);
+            Summary summary = gson.fromJson(bundle.getString(KEY_SUMMARY), Summary.class);
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.your_placeholder, DetailFragment.newInstance(bundle.getString(SUMMARY_KEY)));
+            fragmentTransaction.replace(R.id.your_placeholder, DetailFragment.newInstance(bundle.getString(KEY_SUMMARY)));
             fragmentTransaction.commit();
-
-            appBarTitle.setText(getString(R.string.detail_title, Utils.stringToDate(summary.datePaid)));
             Log.d("lwg", "DetailActivity: " + summary.datePaid);
         }
     }

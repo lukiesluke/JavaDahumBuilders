@@ -2,33 +2,33 @@ package com.dahumbuilders.model;
 
 public class Detail {
     public String projName;
-    public String cash;
-    public String check;
-    public String bankTransfer;
-    public String expenses;
-    public String total;
+    public Double cash;
+    public Double check;
+    public Double bankTransfer;
+    public Double expenses;
+    public Double total;
 
     public String getProjName() {
         return projName;
     }
 
-    public String getCash() {
+    public Double getCash() {
         return cash;
     }
 
-    public String getCheck() {
+    public Double getCheck() {
         return check;
     }
 
-    public String getBankTransfer() {
+    public Double getBankTransfer() {
         return bankTransfer;
     }
 
-    public String getExpenses() {
+    public Double getExpenses() {
         return expenses;
     }
 
-    public String getTotal() {
+    public Double getTotal() {
         return total;
     }
 }

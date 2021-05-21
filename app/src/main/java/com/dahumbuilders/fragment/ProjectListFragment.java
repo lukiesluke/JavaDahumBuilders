@@ -1,29 +1,44 @@
 package com.dahumbuilders.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.dahumbuilders.R;
+import com.dahumbuilders.activity.ProjectActivity;
+import com.dahumbuilders.adapter.ProjectAdapter;
+import com.dahumbuilders.model.Project;
+import com.dahumbuilders.presenter.IPresenter;
+import com.dahumbuilders.presenter.ProjectPresenter;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ProjectListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProjectListFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+public class ProjectListFragment extends BaseFragment implements ProjectAdapter.OnProjectNameClickListener, IPresenter {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private ProjectAdapter adapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private ProjectPresenter presenter;
+    private RecyclerView recyclerView;
+    private final List<Project> projectList = new ArrayList<>();
 
     public ProjectListFragment() {
     }
@@ -40,6 +55,7 @@ public class ProjectListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -48,6 +64,39 @@ public class ProjectListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_project_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_project_list, container, false);
+        recyclerView = view.findViewById(R.id.recycler);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
+
+        presenter = new ProjectPresenter(getContext(), this);
+        presenter.ready();
+        return view;
+    }
+
+    @Override
+    public void init() {
+        swipeRefreshLayout.setEnabled(false);
+
+        /*adapter = new ProjectAdapter(presenter.getProjectListCachedFile(), this);*/
+        adapter = new ProjectAdapter(projectList, this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setAdapter(adapter);
+        presenter.requestFromFirebase();
+    }
+
+    @Override
+    public void requestFirebaseOnDataChange(List<Project> projectList) {
+        adapter.setProject(projectList);
+    }
+
+    @Override
+    public void itemClickedProjectName(View view, int position) {
+        Project project = (Project) view.getTag();
+        String projectString = gson.toJson(project);
+
+        Intent intent = new Intent(getActivity(), ProjectActivity.class);
+        intent.putExtra(ProjectActivity.KEY_PROJECT, projectString);
+        startActivity(intent);
+        Objects.requireNonNull(getActivity()).overridePendingTransition(R.xml.enter, R.xml.exit);
     }
 }

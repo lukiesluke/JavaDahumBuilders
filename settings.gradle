@@ -1,2 +1,3 @@
+include ':tprealty'
 include ':app'
 rootProject.name = "DahumBuilders"
