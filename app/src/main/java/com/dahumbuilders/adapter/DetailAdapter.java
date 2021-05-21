@@ -16,7 +16,7 @@ import com.dahumbuilders.model.Detail;
 import java.util.List;
 
 public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder> {
-    private List<Detail> detailList;
+    private final List<Detail> detailList;
 
     public DetailAdapter(List<Detail> detailList) {
         this.detailList = detailList;
@@ -27,6 +27,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
+
         View view = inflater.inflate(R.layout.item_detail, parent, false);
         return new ViewHolder(view);
     }
@@ -59,6 +60,11 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
             bankTransfer = itemView.findViewById(R.id.txtBankTransfer);
             check = itemView.findViewById(R.id.txtCheck);
 
+            projName.setTypeface(Utils.fontRegular(itemView.getContext()));
+            cash.setTypeface(Utils.fontLight(itemView.getContext()));
+            expenses.setTypeface(Utils.fontLight(itemView.getContext()));
+            bankTransfer.setTypeface(Utils.fontLight(itemView.getContext()));
+            check.setTypeface(Utils.fontLight(itemView.getContext()));
         }
     }
 }

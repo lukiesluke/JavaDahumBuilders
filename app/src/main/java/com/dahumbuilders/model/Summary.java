@@ -4,62 +4,34 @@ import java.util.List;
 
 public class Summary {
     public String datePaid;
-    public String totalCash;
-    public String totalCheck;
-    public String totalBankTransfer;
-    public String expenses;
-    public String totalCashOnHand;
+    public Double totalCash;
+    public Double totalCheck;
+    public Double totalBankTransfer;
+    public Double expenses;
+    public Double totalCashOnHand;
     public List<Detail> details;
-
-    public void setDatePaid(String datePaid) {
-        this.datePaid = datePaid;
-    }
-
-    public void setTotalCash(String totalCash) {
-        this.totalCash = totalCash;
-    }
-
-    public void setTotalCheck(String totalCheck) {
-        this.totalCheck = totalCheck;
-    }
-
-    public void setTotalBankTransfer(String totalBankTransfer) {
-        this.totalBankTransfer = totalBankTransfer;
-    }
-
-    public void setExpenses(String expenses) {
-        this.expenses = expenses;
-    }
-
-    public void setTotalCashOnHand(String totalCashOnHand) {
-        this.totalCashOnHand = totalCashOnHand;
-    }
-
-    public void setDetails(List<Detail> details) {
-        this.details = details;
-    }
 
     public String getDatePaid() {
         return datePaid;
     }
 
-    public String getTotalCash() {
+    public Double getTotalCash() {
         return totalCash;
     }
 
-    public String getTotalCheck() {
+    public Double getTotalCheck() {
         return totalCheck;
     }
 
-    public String getTotalBankTransfer() {
+    public Double getTotalBankTransfer() {
         return totalBankTransfer;
     }
 
-    public String getExpenses() {
+    public Double getExpenses() {
         return expenses;
     }
 
-    public String getTotalCashOnHand() {
+    public Double getTotalCashOnHand() {
         return totalCashOnHand;
     }
 

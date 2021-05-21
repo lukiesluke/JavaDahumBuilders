@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "446822817323",
+    "firebase_url": "https://tprealtydevelopmentcorp-28101-default-rtdb.firebaseio.com",
+    "project_id": "tprealtydevelopmentcorp-28101",
+    "storage_bucket": "tprealtydevelopmentcorp-28101.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:446822817323:android:d232e492ac48078295946e",
+        "android_client_info": {
+          "package_name": "com.tprealty.corporation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "446822817323-3rd5rhiu2ilno6vg3neubvrh4h8mavb0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAzbziKhqBtb3ojl9O1ryL9fLzhCggl2A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "446822817323-3rd5rhiu2ilno6vg3neubvrh4h8mavb0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
