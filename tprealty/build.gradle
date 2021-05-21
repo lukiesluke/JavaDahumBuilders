@@ -20,8 +20,8 @@ android {
 
     signingConfigs {
         release {
-            storeFile file("$projectDir/tprealty_keystore.jks")
-            keyAlias 'TPRealty'
+            storeFile file("$projectDir/my-release-key.keystore")
+            keyAlias 'tp_corp'
             keyPassword '88888888'
             storePassword '88888888'
         }
