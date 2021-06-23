@@ -3,7 +3,6 @@ package com.dahumbuilders.activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -68,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
                         // Log and toast
                         Log.w("lwg", "Hello toke: " + token);
-                        Toast.makeText(MainActivity.this, "Hello toke: " + token, Toast.LENGTH_LONG).show();
+//                        Toast.makeText(MainActivity.this, "Hello toke: " + token, Toast.LENGTH_LONG).show();
                     }
                 });
 
