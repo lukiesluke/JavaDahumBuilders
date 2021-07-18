@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.dahumbuilders.R;
+import com.dahumbuilders.activity.MapsActivity;
 import com.dahumbuilders.activity.ProjectActivity;
 import com.dahumbuilders.adapter.ProjectAdapter;
 import com.dahumbuilders.model.Project;
@@ -94,9 +95,17 @@ public class ProjectListFragment extends BaseFragment implements ProjectAdapter.
         Project project = (Project) view.getTag();
         String projectString = gson.toJson(project);
 
-        Intent intent = new Intent(getActivity(), ProjectActivity.class);
-        intent.putExtra(ProjectActivity.KEY_PROJECT, projectString);
-        startActivity(intent);
-        Objects.requireNonNull(getActivity()).overridePendingTransition(R.xml.enter, R.xml.exit);
+        if (view.getId() == R.id.location) {
+            Intent intent = new Intent(getActivity(), MapsActivity.class);
+            intent.putExtra(ProjectActivity.KEY_PROJECT, projectString);
+            startActivity(intent);
+            Objects.requireNonNull(getActivity()).overridePendingTransition(R.xml.enter, R.xml.exit);
+        } else {
+
+            Intent intent = new Intent(getActivity(), ProjectActivity.class);
+            intent.putExtra(ProjectActivity.KEY_PROJECT, projectString);
+            startActivity(intent);
+            Objects.requireNonNull(getActivity()).overridePendingTransition(R.xml.enter, R.xml.exit);
+        }
     }
 }

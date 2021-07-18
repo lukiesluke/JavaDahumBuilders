@@ -1,10 +1,11 @@
-package com.tprealty.corporation.activity;
+package com.dahumbuilders.activity;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.dahumbuilders.R;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -12,7 +13,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.tprealty.corporation.R;
 
 import java.util.Objects;
 
@@ -34,8 +34,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         Objects.requireNonNull(mapFragment).getMapAsync(this);
     }
 
@@ -53,17 +52,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng tpCorpOffice = new LatLng(14.367562,120.911457);
-        LatLng tpKawayanRaqzFaith = new LatLng(14.345385,120.881325);
-        LatLng tpTagaytayRaqzSlab = new LatLng(14.152033,120.925852);
-        LatLng tpGenCasDelaTorre = new LatLng(14.367522,120.909690);
+        LatLng dahumOffice = new LatLng(14.432342, 120.946600);
+        LatLng prjAlfonzo = new LatLng(14.413131, 120.978068);
+        LatLng prjMendoza = new LatLng(14.389020, 120.999265);
+        LatLng prjTagaytay = new LatLng(14.141536, 120.999963);
 
-        mMap.addMarker(new MarkerOptions().position(tpKawayanRaqzFaith).title("Raqz Faith"));
-        mMap.addMarker(new MarkerOptions().position(tpTagaytayRaqzSlab).title("Raqz Love"));
-        mMap.addMarker(new MarkerOptions().position(tpGenCasDelaTorre).title("Cas Dela Torre"));
+        mMap.addMarker(new MarkerOptions().position(dahumOffice).title("Dahum Builders Office")).showInfoWindow();
+        mMap.addMarker(new MarkerOptions().position(prjAlfonzo).title("Alfonzo Village"));
+        mMap.addMarker(new MarkerOptions().position(prjMendoza).title("Mendoza Village"));
+        mMap.addMarker(new MarkerOptions().position(prjTagaytay).title("Greenfield Tagaytay"));
 
-        mMap.addMarker(new MarkerOptions().position(tpCorpOffice).title("TP Realty Corporation")).showInfoWindow();
-        CameraUpdate location = CameraUpdateFactory.newLatLngZoom(tpCorpOffice, 13);
+        CameraUpdate location = CameraUpdateFactory.newLatLngZoom(dahumOffice, 13);
         mMap.animateCamera(location);
     }
 

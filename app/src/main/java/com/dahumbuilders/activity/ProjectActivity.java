@@ -56,8 +56,8 @@ public class ProjectActivity extends BaseActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
+            toolbar.setNavigationOnClickListener(v -> onBackPressed());
         }
-        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
