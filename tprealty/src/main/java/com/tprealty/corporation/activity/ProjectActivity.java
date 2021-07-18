@@ -1,11 +1,14 @@
 package com.tprealty.corporation.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,7 +24,7 @@ import com.tprealty.corporation.adapter.ProjectListAdapter;
 import com.tprealty.corporation.model.Project;
 import com.tprealty.corporation.network.Constant;
 
-public class ProjectActivity extends BaseActivity {
+public class ProjectActivity extends BaseActivity implements View.OnClickListener {
     public static final String KEY_PROJECT = "key_project";
     private ProjectListAdapter adapter;
     private EditText search;
@@ -37,6 +40,9 @@ public class ProjectActivity extends BaseActivity {
 
         LinearLayout linearLayout = findViewById(R.id.layout_holder);
         setupUI(linearLayout, ProjectActivity.this);
+
+        ImageView location = findViewById(R.id.location);
+        location.setOnClickListener(this);
 
         TextView projectName = findViewById(R.id.txtProjectName);
         TextView projectAddress = findViewById(R.id.txtProjectAddress);
@@ -96,5 +102,15 @@ public class ProjectActivity extends BaseActivity {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.xml.left_to_right, R.xml.right_to_left);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.location) {
+            Intent intent = new Intent(this, MapsActivity.class);
+            intent.putExtra(ProjectActivity.KEY_PROJECT, "ProjectActivity");
+            startActivity(intent);
+            overridePendingTransition(R.xml.enter, R.xml.exit);
+        }
     }
 }
