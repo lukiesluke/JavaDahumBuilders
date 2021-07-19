@@ -1,12 +1,10 @@
 package com.dahumbuilders.fragment;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -15,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.dahumbuilders.R;
+import com.dahumbuilders.Utils;
 import com.dahumbuilders.activity.DetailActivity;
 import com.dahumbuilders.adapter.SummaryAdapter;
 import com.dahumbuilders.model.Summary;
@@ -77,7 +76,7 @@ public class SummaryFragment extends BaseFragment implements SummaryAdapter.OnSu
                     }
                     isLogin = false;
                 }
-                hideKeyboard();
+                Utils.hideKeyboardFragment(Objects.requireNonNull(getContext()), Objects.requireNonNull(getView()));
             }
         });
 
@@ -122,9 +121,5 @@ public class SummaryFragment extends BaseFragment implements SummaryAdapter.OnSu
             layoutViewList.setVisibility(View.GONE);
             layoutViewLogin.setVisibility(View.VISIBLE);
         }
-    }
-
-    private void hideKeyboard() {
-        ((InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(getView().getWindowToken(), 0);
     }
 }

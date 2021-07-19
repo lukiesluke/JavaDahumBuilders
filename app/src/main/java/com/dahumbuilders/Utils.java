@@ -1,10 +1,13 @@
 package com.dahumbuilders;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -68,5 +71,9 @@ public class Utils {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(key, value);
         editor.apply();
+    }
+
+    public static void hideKeyboardFragment(Context context, View view) {
+        ((InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }
