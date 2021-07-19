@@ -40,7 +40,9 @@
 
         <activity android:name=".activity.ProjectActivity" />
         <activity android:name=".activity.DetailActivity" />
-        <activity android:name=".activity.MainActivity">
+        <activity
+            android:name=".activity.MainActivity"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -49,7 +51,7 @@
         </activity>
         <activity
             android:name=".activity.MapsActivity"
-            android:label="@string/title_activity_maps"/>
+            android:label="@string/title_activity_maps" />
         <activity android:name=".activity.SplashActivity" />
 
         <service

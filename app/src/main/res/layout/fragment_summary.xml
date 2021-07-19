@@ -4,9 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
+    android:orientation="vertical"
     android:padding="5dp"
     tools:context=".fragment.SummaryFragment">
 
-    <include layout="@layout/layout_recycler" />
+    <include
+        android:id="@+id/layoutViewLogin"
+        layout="@layout/layout_login" />
+
+    <include
+        android:id="@+id/layoutViewList"
+        layout="@layout/layout_recycler" />
 
 </LinearLayout>
