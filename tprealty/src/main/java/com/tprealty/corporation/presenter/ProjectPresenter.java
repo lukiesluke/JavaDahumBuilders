@@ -12,12 +12,14 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.tprealty.corporation.Utils;
+import com.tprealty.corporation.model.Logs;
 import com.tprealty.corporation.model.Project;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.tprealty.corporation.network.Constant.FB_REF_PROJECT_LOGS;
 import static com.tprealty.corporation.network.Constant.FB_REF_PROJECT_TEST;
 import static com.tprealty.corporation.network.Constant.PRE_KEY_PROJECT;
 
@@ -53,6 +55,25 @@ public class ProjectPresenter {
                     projectList = arrayList;
                     view.requestFirebaseOnDataChange(projectList);
                     Utils.putPref(context, PRE_KEY_PROJECT, gson.toJson(projectList));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void requestFirebaseOnDataChangeLog() {
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child(FB_REF_PROJECT_LOGS);
+        databaseReference.keepSynced(true);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Logs logs = snapshot.getValue(Logs.class);
+                if (logs != null && !logs.getDatetimeLog().isEmpty()) {
+                    view.requestFirebaseOnDataChangeLog(logs.getDatetimeLog());
                 }
             }
 

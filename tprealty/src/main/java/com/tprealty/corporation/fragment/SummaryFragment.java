@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +14,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.tprealty.corporation.R;
 import com.tprealty.corporation.activity.DetailActivity;
 import com.tprealty.corporation.adapter.SummaryAdapter;
+import com.tprealty.corporation.model.Summary;
 import com.tprealty.corporation.presenter.ISummary;
 import com.tprealty.corporation.presenter.SummaryPresenter;
 
@@ -20,14 +22,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import com.tprealty.corporation.model.Summary;
-
 public class SummaryFragment extends BaseFragment implements SummaryAdapter.OnSummaryClickListener, ISummary {
 
     private SummaryAdapter adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
     private SummaryPresenter presenter;
     private RecyclerView recyclerView;
+    private TextView txtLog;
+
     private final List<Summary> summaryList = new ArrayList<>();
 
     public SummaryFragment() {
@@ -45,6 +47,7 @@ public class SummaryFragment extends BaseFragment implements SummaryAdapter.OnSu
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_summary, container, false);
+        txtLog = view.findViewById(R.id.txtLogs);
         recyclerView = view.findViewById(R.id.recycler);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
 
@@ -62,11 +65,17 @@ public class SummaryFragment extends BaseFragment implements SummaryAdapter.OnSu
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
         presenter.requestFromFirebase();
+        presenter.requestFromFirebaseDateLogs();
     }
 
     @Override
     public void requestFirebaseOnDataChange(List<Summary> summaryList) {
         adapter.setSummary(summaryList);
+    }
+
+    @Override
+    public void requestFirebaseOnDataChangeLog(String datetimeLog) {
+        txtLog.setText(datetimeLog);
     }
 
     @Override

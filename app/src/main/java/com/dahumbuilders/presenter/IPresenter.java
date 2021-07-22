@@ -9,4 +9,6 @@ public interface IPresenter {
     void init();
 
     void requestFirebaseOnDataChange(List<Project> projectList);
+
+    void requestFirebaseOnDataChangeLog(String datetimeLog);
 }

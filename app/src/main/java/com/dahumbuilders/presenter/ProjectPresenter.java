@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 
 import com.dahumbuilders.Utils;
+import com.dahumbuilders.model.Logs;
 import com.dahumbuilders.model.Project;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,6 +19,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.dahumbuilders.network.Constant.FB_REF_PROJECT_LOGS;
 import static com.dahumbuilders.network.Constant.FB_REF_PROJECT_TEST;
 import static com.dahumbuilders.network.Constant.PRE_KEY_PROJECT;
 
@@ -53,6 +55,25 @@ public class ProjectPresenter {
                     projectList = arrayList;
                     view.requestFirebaseOnDataChange(projectList);
                     Utils.putPref(context, PRE_KEY_PROJECT, gson.toJson(projectList));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void requestFromFirebaseDateLogs() {
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child(FB_REF_PROJECT_LOGS);
+        databaseReference.keepSynced(true);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Logs logs = snapshot.getValue(Logs.class);
+                if (logs != null && !logs.getDatetimeLog().isEmpty()) {
+                    view.requestFirebaseOnDataChangeLog(logs.getDatetimeLog());
                 }
             }
 

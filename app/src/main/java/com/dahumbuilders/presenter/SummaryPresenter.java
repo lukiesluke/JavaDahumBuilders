@@ -1,10 +1,12 @@
 package com.dahumbuilders.presenter;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import com.dahumbuilders.Utils;
+import com.dahumbuilders.model.Logs;
 import com.dahumbuilders.model.ResponseSummary;
 import com.dahumbuilders.model.Summary;
 import com.dahumbuilders.network.GetDataService;
@@ -25,6 +27,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.dahumbuilders.network.Constant.FB_REF_SUMMARY_LOGS;
 import static com.dahumbuilders.network.Constant.FB_REF_SUMMARY_TEST;
 import static com.dahumbuilders.network.Constant.PRE_KEY_SUMMARY;
 
@@ -61,6 +64,26 @@ public class SummaryPresenter {
                     summaryList = arrayList;
                     view.requestFirebaseOnDataChange(summaryList);
                     Utils.putPref(context, PRE_KEY_SUMMARY, gson.toJson(summaryList));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void requestFromFirebaseDateLogs() {
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child(FB_REF_SUMMARY_LOGS);
+        databaseReference.keepSynced(true);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Logs logs = snapshot.getValue(Logs.class);
+                if (logs != null && !logs.getDatetimeLog().isEmpty()) {
+                    view.requestFirebaseOnDataChangeLog(logs.getDatetimeLog());
+                    Log.d("lwg", "onDataChange " + logs.getDatetimeLog());
                 }
             }
 

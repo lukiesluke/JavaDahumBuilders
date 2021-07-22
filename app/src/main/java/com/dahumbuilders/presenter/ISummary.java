@@ -8,4 +8,6 @@ public interface ISummary {
     void init();
 
     void requestFirebaseOnDataChange(List<Summary> summaryList);
+
+    void requestFirebaseOnDataChangeLog(String datetimeLog);
 }

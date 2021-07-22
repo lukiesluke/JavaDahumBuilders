@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,6 +40,7 @@ public class ProjectListFragment extends BaseFragment implements ProjectAdapter.
     private SwipeRefreshLayout swipeRefreshLayout;
     private ProjectPresenter presenter;
     private RecyclerView recyclerView;
+    private TextView txtLog;
     private final List<Project> projectList = new ArrayList<>();
 
     public ProjectListFragment() {
@@ -68,6 +70,7 @@ public class ProjectListFragment extends BaseFragment implements ProjectAdapter.
         View view = inflater.inflate(R.layout.fragment_project_list, container, false);
         recyclerView = view.findViewById(R.id.recycler);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
+        txtLog = view.findViewById(R.id.txtLogs);
 
         presenter = new ProjectPresenter(getContext(), this);
         presenter.ready();
@@ -83,11 +86,17 @@ public class ProjectListFragment extends BaseFragment implements ProjectAdapter.
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
         presenter.requestFromFirebase();
+        presenter.requestFromFirebaseDateLogs();
     }
 
     @Override
     public void requestFirebaseOnDataChange(List<Project> projectList) {
         adapter.setProject(projectList);
+    }
+
+    @Override
+    public void requestFirebaseOnDataChangeLog(String datetimeLog) {
+        txtLog.setText(datetimeLog);
     }
 
     @Override

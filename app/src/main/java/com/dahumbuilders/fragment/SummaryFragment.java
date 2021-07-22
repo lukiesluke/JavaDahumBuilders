@@ -33,6 +33,7 @@ public class SummaryFragment extends BaseFragment implements SummaryAdapter.OnSu
     private RecyclerView recyclerView;
     private boolean isLogin;
     private TextView txtPassword, errorMassage;
+    private TextView txtLog;
     private View layoutViewList, layoutViewLogin;
 
     public SummaryFragment() {
@@ -54,6 +55,7 @@ public class SummaryFragment extends BaseFragment implements SummaryAdapter.OnSu
         swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
         txtPassword = view.findViewById(R.id.txtPassword);
         errorMassage = view.findViewById(R.id.errorMassage);
+        txtLog = view.findViewById(R.id.txtLogs);
         layoutViewList = view.findViewById(R.id.layoutViewList);
 
         layoutViewLogin = view.findViewById(R.id.layoutViewLogin);
@@ -95,11 +97,17 @@ public class SummaryFragment extends BaseFragment implements SummaryAdapter.OnSu
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
         presenter.requestFromFirebase();
+        presenter.requestFromFirebaseDateLogs();
     }
 
     @Override
     public void requestFirebaseOnDataChange(List<Summary> summaryList) {
         adapter.setSummary(summaryList);
+    }
+
+    @Override
+    public void requestFirebaseOnDataChangeLog(String datetimeLog) {
+        txtLog.setText(datetimeLog);
     }
 
     @Override
