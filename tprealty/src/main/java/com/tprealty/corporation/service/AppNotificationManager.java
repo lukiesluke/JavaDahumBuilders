@@ -5,6 +5,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 
@@ -48,13 +50,16 @@ public class AppNotificationManager {
         }
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+        Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), android.R.drawable.ic_dialog_map);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_baseline_format_list_bulleted_24)
+                .setSmallIcon(R.drawable.ic_google_map_34)
                 .setContentTitle(title)
+                .setLargeIcon(largeIcon)
                 .setContentText(body)
                 .setAutoCancel(true)
-                .setContentIntent(pendingIntent);
+                .setContentIntent(pendingIntent)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(body));
         notificationManager.notify(randomID, builder.build());
     }
 
