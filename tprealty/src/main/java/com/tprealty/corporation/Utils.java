@@ -62,6 +62,11 @@ public class Utils {
         return sharedPref.getString(key, "{}");
     }
 
+    public static String getPref(Context context, String key, String defValue) {
+        SharedPreferences sharedPref = context.getSharedPreferences(PRE_NAME_DAHUM, Context.MODE_PRIVATE);
+        return sharedPref.getString(key, defValue);
+    }
+
     public static void putPref(Context context, String key, String value) {
         SharedPreferences sharedPref = context.getSharedPreferences(PRE_NAME_DAHUM, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();

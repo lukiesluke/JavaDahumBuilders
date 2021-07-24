@@ -9,5 +9,5 @@ public interface ISummary {
 
     void requestFirebaseOnDataChange(List<Summary> summaryList);
 
-    void requestFirebaseOnDataChangeLog(String datetimeLog);
+    void requestFirebaseOnDataChangeLog(String datetimeLog, String userInfo);
 }

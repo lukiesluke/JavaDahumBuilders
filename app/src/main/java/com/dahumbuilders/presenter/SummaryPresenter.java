@@ -82,7 +82,7 @@ public class SummaryPresenter {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Logs logs = snapshot.getValue(Logs.class);
                 if (logs != null && !logs.getDatetimeLog().isEmpty()) {
-                    view.requestFirebaseOnDataChangeLog(logs.getDatetimeLog());
+                    view.requestFirebaseOnDataChangeLog(logs.getDatetimeLog(), logs.getUserInfo());
                     Log.d("lwg", "onDataChange " + logs.getDatetimeLog());
                 }
             }
@@ -95,7 +95,7 @@ public class SummaryPresenter {
     }
 
     public List<Summary> getSummaryListCachedFile() {
-        String cachedSummary = Utils.getPref(context, PRE_KEY_SUMMARY);
+        String cachedSummary = Utils.getPref(context, PRE_KEY_SUMMARY, "{}");
         if (cachedSummary.length() > 2) {
             Type listType = new TypeToken<ArrayList<Summary>>() {
             }.getType();
@@ -122,7 +122,7 @@ public class SummaryPresenter {
 
             @Override
             public void onFailure(@NonNull Call<ResponseSummary> call, @NonNull Throwable t) {
-                String response = Utils.getPref(context, PRE_KEY_SUMMARY);
+                String response = Utils.getPref(context, PRE_KEY_SUMMARY, "{}");
                 if (response.length() > 2) {
                     Type listType = new TypeToken<ArrayList<Summary>>() {
                     }.getType();

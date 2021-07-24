@@ -10,5 +10,5 @@ public interface IPresenter {
 
     void requestFirebaseOnDataChange(List<Project> projectList);
 
-    void requestFirebaseOnDataChangeLog(String datetimeLog);
+    void requestFirebaseOnDataChangeLog(String datetimeLog, String userInfo);
 }

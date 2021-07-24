@@ -74,7 +74,7 @@ public class SummaryPresenter {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Logs logs = snapshot.getValue(Logs.class);
                 if (logs != null && !logs.getDatetimeLog().isEmpty()) {
-                    view.requestFirebaseOnDataChangeLog(logs.getDatetimeLog());
+                    view.requestFirebaseOnDataChangeLog(logs.getDatetimeLog(), logs.getUserInfo());
                 }
             }
 

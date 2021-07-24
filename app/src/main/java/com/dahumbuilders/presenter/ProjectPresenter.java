@@ -73,7 +73,7 @@ public class ProjectPresenter {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Logs logs = snapshot.getValue(Logs.class);
                 if (logs != null && !logs.getDatetimeLog().isEmpty()) {
-                    view.requestFirebaseOnDataChangeLog(logs.getDatetimeLog());
+                    view.requestFirebaseOnDataChangeLog(logs.getDatetimeLog(), logs.getUserInfo());
                 }
             }
 
@@ -85,7 +85,7 @@ public class ProjectPresenter {
     }
 
     public List<Project> getProjectListCachedFile() {
-        String cachedProject = Utils.getPref(context, PRE_KEY_PROJECT);
+        String cachedProject = Utils.getPref(context, PRE_KEY_PROJECT, "{}");
         if (cachedProject.length() > 2) {
             Type listType = new TypeToken<ArrayList<Project>>() {
             }.getType();
