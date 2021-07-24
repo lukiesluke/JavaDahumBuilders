@@ -8,13 +8,21 @@
     android:padding="5dp"
     tools:context=".fragment.SummaryFragment">
 
-    <TextView
-        android:id="@+id/txtLogs"
+    <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/rounder_corner"
-        android:padding="5dp" />
+        android:foreground="@drawable/custom_bg"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardElevation="2dp"
+        card_view:cardUseCompatPadding="true">
+
+        <TextView
+            android:id="@+id/txtLogs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp" />
+    </androidx.cardview.widget.CardView>
 
     <include layout="@layout/layout_recycler" />
 
