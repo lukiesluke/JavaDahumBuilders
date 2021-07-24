@@ -28,10 +28,10 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabIndicatorColor="@android:color/white"
+            app:tabIndicatorColor="@color/colorSecondaryText"
             app:tabSelectedTextColor="@android:color/white"
             app:tabTextAppearance="@style/MyCustomTextAppearance"
-            app:tabTextColor="@android:color/darker_gray" />
+            app:tabTextColor="@color/colorLightPrimary" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager

@@ -6,4 +6,7 @@
     <color name="colorLightGray">#BDBDBD</color>
     <color name="colorRed">#F44336</color>
     <color name="colorGreen">#06EF10</color>
+    <color name="colorPrimaryText">#212121</color>
+    <color name="colorSecondaryText">#FFFFFF</color>
+    <color name="colorLightPrimary">#C8E6C9</color>
 </resources>
