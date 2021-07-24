@@ -6,12 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.dahumbuilders.R;
+import com.dahumbuilders.adapter.CustomInfoWindowAdapter;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.Objects;
@@ -19,6 +21,7 @@ import java.util.Objects;
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private Marker marker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapsActivity.this));
 
         // Add a marker in Sydney and move the camera
         LatLng dahumOffice = new LatLng(14.432342, 120.946600);
@@ -57,10 +61,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         LatLng prjMendoza = new LatLng(14.389020, 120.999265);
         LatLng prjTagaytay = new LatLng(14.141536, 120.999963);
 
-        mMap.addMarker(new MarkerOptions().position(dahumOffice).title("Dahum Builders Office")).showInfoWindow();
-        mMap.addMarker(new MarkerOptions().position(prjAlfonzo).title("Alfonzo Village"));
-        mMap.addMarker(new MarkerOptions().position(prjMendoza).title("Mendoza Village"));
-        mMap.addMarker(new MarkerOptions().position(prjTagaytay).title("Greenfield Tagaytay"));
+        MarkerOptions mDahumOffice = new MarkerOptions().position(dahumOffice).title("Dahum Builders Office")
+                .snippet("Dahum Builders");
+        MarkerOptions mPrjAlfonzo = new MarkerOptions().position(prjAlfonzo).title("Alfonzo Village")
+                .snippet("Dahum Builders");
+        MarkerOptions mPrjMendoza = new MarkerOptions().position(prjMendoza).title("Mendoza Village")
+                .snippet("Dahum Builders");
+        MarkerOptions mPrjTagaytay = new MarkerOptions().position(prjTagaytay).title("Greenfield Tagaytay")
+                .snippet("Dahum Builders");
+
+        mMap.addMarker(mDahumOffice).showInfoWindow();
+        mMap.addMarker(mPrjAlfonzo);
+        mMap.addMarker(mPrjMendoza);
+        mMap.addMarker(mPrjTagaytay);
 
         CameraUpdate location = CameraUpdateFactory.newLatLngZoom(dahumOffice, 13);
         mMap.animateCamera(location);
