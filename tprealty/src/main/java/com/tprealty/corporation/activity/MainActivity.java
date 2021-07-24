@@ -79,14 +79,18 @@ public class MainActivity extends AppCompatActivity {
         Bundle extras = intent.getExtras();
         if (extras != null) {
             if (extras.containsKey(getString(R.string.key_notification))) {
-                String msg = extras.getString(getString(R.string.key_notification));
-                TabLayout.Tab tab;
-                if (msg.contains(getString(R.string.project))) {
-                    tab = tabLayout.getTabAt(1);
-                } else {
-                    tab = tabLayout.getTabAt(0);
+                try {
+                    String msg = extras.getString(getString(R.string.key_notification));
+                    TabLayout.Tab tab;
+                    if (msg.contains(getString(R.string.project))) {
+                        tab = tabLayout.getTabAt(1);
+                    } else {
+                        tab = tabLayout.getTabAt(0);
+                    }
+                    Objects.requireNonNull(tab).select();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                Objects.requireNonNull(tab).select();
             }
         }
         super.onNewIntent(intent);
