@@ -8,10 +8,6 @@
     android:padding="5dp"
     tools:context=".fragment.SummaryFragment">
 
-    <include
-        android:id="@+id/layoutViewLogin"
-        layout="@layout/layout_login" />
-
     <TextView
         android:id="@+id/txtLogs"
         android:layout_width="wrap_content"
@@ -20,6 +16,10 @@
         android:background="@drawable/rounder_corner"
         android:padding="5dp"
         android:text="@string/clear" />
+
+    <include
+        android:id="@+id/layoutViewLogin"
+        layout="@layout/layout_login" />
 
     <include
         android:id="@+id/layoutViewList"

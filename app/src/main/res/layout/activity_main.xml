@@ -31,7 +31,7 @@
             app:tabIndicatorColor="@android:color/white"
             app:tabSelectedTextColor="@android:color/white"
             app:tabTextAppearance="@style/MyCustomTextAppearance"
-            app:tabTextColor="@android:color/darker_gray" />
+            app:tabTextColor="@color/colorSecondaryText" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
