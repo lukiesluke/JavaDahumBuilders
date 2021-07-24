@@ -13,6 +13,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.tprealty.corporation.R;
+import com.tprealty.corporation.adapter.CustomInfoWindowAdapter;
 
 import java.util.Objects;
 
@@ -51,18 +52,28 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapsActivity.this));
 
         // Add a marker in Sydney and move the camera
-        LatLng tpCorpOffice = new LatLng(14.367562,120.911457);
-        LatLng tpKawayanRaqzFaith = new LatLng(14.345385,120.881325);
-        LatLng tpTagaytayRaqzSlab = new LatLng(14.152033,120.925852);
-        LatLng tpGenCasDelaTorre = new LatLng(14.367522,120.909690);
+        LatLng tpCorpOffice = new LatLng(14.367562, 120.911457);
+        LatLng tpKawayanRaqzFaith = new LatLng(14.345385, 120.881325);
+        LatLng tpTagaytayRaqzSlab = new LatLng(14.152033, 120.925852);
+        LatLng tpGenCasDelaTorre = new LatLng(14.367522, 120.909690);
 
-        mMap.addMarker(new MarkerOptions().position(tpKawayanRaqzFaith).title("Raqz Faith"));
-        mMap.addMarker(new MarkerOptions().position(tpTagaytayRaqzSlab).title("Raqz Love"));
-        mMap.addMarker(new MarkerOptions().position(tpGenCasDelaTorre).title("Cas Dela Torre"));
+        MarkerOptions mTpCorpOffice = new MarkerOptions().position(tpCorpOffice).title("TP Realty Corporation")
+                .snippet("TP Realty");
+        MarkerOptions mKawayanRaqzFaith = new MarkerOptions().position(tpKawayanRaqzFaith).title("Raqz Faith")
+                .snippet("TP Realty");
+        MarkerOptions mTagaytayRaqzSlab = new MarkerOptions().position(tpTagaytayRaqzSlab).title("Raqz Love")
+                .snippet("TP Realty");
+        MarkerOptions mGenCasDelaTorre = new MarkerOptions().position(tpGenCasDelaTorre).title("Cas Dela Torre")
+                .snippet("TP Realty");
 
-        mMap.addMarker(new MarkerOptions().position(tpCorpOffice).title("TP Realty Corporation")).showInfoWindow();
+        mMap.addMarker(mTpCorpOffice).showInfoWindow();
+        mMap.addMarker(mKawayanRaqzFaith);
+        mMap.addMarker(mTagaytayRaqzSlab);
+        mMap.addMarker(mGenCasDelaTorre);
+
         CameraUpdate location = CameraUpdateFactory.newLatLngZoom(tpCorpOffice, 13);
         mMap.animateCamera(location);
     }
