@@ -2,6 +2,7 @@ package com.tprealty.corporation.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,12 +34,15 @@ public class MainActivity extends AppCompatActivity {
     private final List<Fragment> fragmentList = new ArrayList<>();
     private final List<String> stringList = new ArrayList<>();
     private TabLayout tabLayout;
+    private TabLayout.Tab tab;
+    private int tabIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         onNewIntent(getIntent());
+        Log.d("lwg", "onCreate(): " + tabIndex);
 
         TextView appBarTitle = findViewById(R.id.appBarTitle);
         appBarTitle.setTypeface(Utils.fontBold(getAssets()));
@@ -56,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
         viewPagerAdapter.addFragment(fragmentList, stringList);
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        tab = tabLayout.getTabAt(tabIndex);
+        Objects.requireNonNull(tab).select();
 
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
@@ -80,13 +87,14 @@ public class MainActivity extends AppCompatActivity {
         if (extras != null) {
             if (extras.containsKey(getString(R.string.key_notification))) {
                 try {
+                    //Get notification body onclick and set tabIndex select position.
                     String msg = extras.getString(getString(R.string.key_notification));
-                    TabLayout.Tab tab;
                     if (msg.contains(getString(R.string.project))) {
-                        tab = tabLayout.getTabAt(1);
+                        tabIndex = 1;
                     } else {
-                        tab = tabLayout.getTabAt(0);
+                        tabIndex = 0;
                     }
+                    tab = tabLayout.getTabAt(tabIndex);
                     Objects.requireNonNull(tab).select();
                 } catch (Exception e) {
                     e.printStackTrace();
