@@ -53,7 +53,7 @@ public class AppNotificationManager {
         Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), android.R.drawable.ic_dialog_map);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_google_map_34)
+                .setSmallIcon(R.drawable.ic_tpcorp_24)
                 .setContentTitle(title)
                 .setLargeIcon(largeIcon)
                 .setContentText(body)
