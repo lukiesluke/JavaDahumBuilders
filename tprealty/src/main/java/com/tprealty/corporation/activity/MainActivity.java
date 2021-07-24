@@ -1,9 +1,8 @@
 package com.tprealty.corporation.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +21,7 @@ import com.tprealty.corporation.fragment.SummaryFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.tprealty.corporation.network.Constant.CHANNEL_NAME;
 import static com.tprealty.corporation.network.Constant.EMPTY;
@@ -32,16 +32,18 @@ public class MainActivity extends AppCompatActivity {
 
     private final List<Fragment> fragmentList = new ArrayList<>();
     private final List<String> stringList = new ArrayList<>();
+    private TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        onNewIntent(getIntent());
 
         TextView appBarTitle = findViewById(R.id.appBarTitle);
         appBarTitle.setTypeface(Utils.fontBold(getAssets()));
 
-        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        tabLayout = findViewById(R.id.tabLayout);
         ViewPager viewPager = findViewById(R.id.viewPager);
 
         MainViewPagerAdapter viewPagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager(), 0);
@@ -63,16 +65,30 @@ public class MainActivity extends AppCompatActivity {
 //                            Log.w("lwg", "Fetching FCM registration token failed", task.getException());
                             return;
                         }
-
                         // Get new FCM registration token
                         String token = task.getResult();
-
-                        // Log and toast
 //                        Log.w("lwg", "Hello toke: " + token);
 //                        Toast.makeText(MainActivity.this, "Hello toke: " + token, Toast.LENGTH_LONG).show();
                     }
                 });
-
         FirebaseMessaging.getInstance().subscribeToTopic(CHANNEL_NAME);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        Bundle extras = intent.getExtras();
+        if (extras != null) {
+            if (extras.containsKey(getString(R.string.key_notification))) {
+                String msg = extras.getString(getString(R.string.key_notification));
+                TabLayout.Tab tab;
+                if (msg.contains(getString(R.string.project))) {
+                    tab = tabLayout.getTabAt(1);
+                } else {
+                    tab = tabLayout.getTabAt(0);
+                }
+                Objects.requireNonNull(tab).select();
+            }
+        }
+        super.onNewIntent(intent);
     }
 }

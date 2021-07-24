@@ -12,4 +12,6 @@
     <string name="location">Location</string>
     <string name="title_activity_maps">Map</string>
     <string name="clear">Clear</string>
+    <string name="key_notification">key_notification</string>
+    <string name="project">Project</string>
 </resources>

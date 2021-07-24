@@ -53,7 +53,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapsActivity.this));
-
+//        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        
         // Add a marker in Sydney and move the camera
         LatLng tpCorpOffice = new LatLng(14.367562, 120.911457);
         LatLng tpKawayanRaqzFaith = new LatLng(14.345385, 120.881325);
