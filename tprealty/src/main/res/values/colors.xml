@@ -9,4 +9,5 @@
     <color name="colorPrimaryText">#212121</color>
     <color name="colorSecondaryText">#FFFFFF</color>
     <color name="colorLightPrimary">#C8E6C9</color>
+    <color name="transparentColorGray">#50C0C0C0</color>
 </resources>
