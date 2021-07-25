@@ -2,7 +2,6 @@ package com.tprealty.corporation.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         onNewIntent(getIntent());
-        Log.d("lwg", "onCreate(): " + tabIndex);
 
         TextView appBarTitle = findViewById(R.id.appBarTitle);
         appBarTitle.setTypeface(Utils.fontBold(getAssets()));

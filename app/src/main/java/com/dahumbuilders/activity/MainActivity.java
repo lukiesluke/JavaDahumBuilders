@@ -1,6 +1,7 @@
 package com.dahumbuilders.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +25,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.dahumbuilders.network.Constant.CHANNEL_NAME;
 import static com.dahumbuilders.network.Constant.EMPTY;
@@ -33,16 +35,20 @@ import static com.dahumbuilders.network.Constant.SUMMARY;
 public class MainActivity extends AppCompatActivity {
     private final List<Fragment> fragmentList = new ArrayList<>();
     private final List<String> stringList = new ArrayList<>();
+    private TabLayout tabLayout;
+    private TabLayout.Tab tab;
+    private int tabIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        onNewIntent(getIntent());
 
         TextView appBarTitle = findViewById(R.id.appBarTitle);
         appBarTitle.setTypeface(Utils.fontBold(getAssets()));
 
-        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        tabLayout = findViewById(R.id.tabLayout);
         ViewPager viewPager = findViewById(R.id.viewPager);
 
         MainViewPagerAdapter viewPagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager(), 0);
@@ -55,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
         viewPagerAdapter.addFragment(fragmentList, stringList);
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        tab = tabLayout.getTabAt(tabIndex);
+        Objects.requireNonNull(tab).select();
+
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -90,6 +100,29 @@ public class MainActivity extends AppCompatActivity {
                 });
 
         FirebaseMessaging.getInstance().subscribeToTopic(CHANNEL_NAME);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        Bundle extras = intent.getExtras();
+        if (extras != null) {
+            if (extras.containsKey(getString(R.string.key_notification))) {
+                try {
+                    //Get notification body onclick and set tabIndex select position.
+                    String msg = extras.getString(getString(R.string.key_notification));
+                    if (msg.contains(getString(R.string.project))) {
+                        tabIndex = 1;
+                    } else {
+                        tabIndex = 0;
+                    }
+                    tab = tabLayout.getTabAt(tabIndex);
+                    Objects.requireNonNull(tab).select();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        super.onNewIntent(intent);
     }
 
     public static void hideKeyboard(Activity activity) {

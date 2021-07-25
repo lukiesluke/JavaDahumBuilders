@@ -15,4 +15,6 @@
     <string name="login">Login</string>
     <string name="invalid_password">Invalid Password!</string>
     <string name="enter_password">Please enter Password!</string>
+    <string name="key_notification">key_notification</string>
+    <string name="project">Project</string>
 </resources>
