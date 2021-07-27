@@ -6,11 +6,17 @@
 For Dahum Builders
 ```sh
 $ cd ROOT_FOLDER
-$ ./gradlew :app:assembleRelease
+$ ./gradlew clean :app:assembleRelease
 ```
 
 For TP Corp
 ```sh
 $ cd ROOT_FOLDER
-$ ./gradlew :tprealty:assembleRelease
+$ ./gradlew clean :tprealty:assembleRelease
+```
+
+Refresh dependencies
+```sh
+$ cd ROOT_FOLDER
+$ ./gradlew clean --refresh-dependencies buildNeeded
 ```
