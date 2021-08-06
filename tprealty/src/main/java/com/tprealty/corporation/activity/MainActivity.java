@@ -1,11 +1,16 @@
 package com.tprealty.corporation.activity;
 
+import static com.tprealty.corporation.network.Constant.CHANNEL_NAME;
+import static com.tprealty.corporation.network.Constant.EMPTY;
+import static com.tprealty.corporation.network.Constant.PROJECT;
+import static com.tprealty.corporation.network.Constant.SUMMARY;
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -14,7 +19,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.tprealty.corporation.R;
-import com.tprealty.corporation.Utils;
 import com.tprealty.corporation.adapter.MainViewPagerAdapter;
 import com.tprealty.corporation.fragment.ProjectListFragment;
 import com.tprealty.corporation.fragment.SummaryFragment;
@@ -22,11 +26,6 @@ import com.tprealty.corporation.fragment.SummaryFragment;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import static com.tprealty.corporation.network.Constant.CHANNEL_NAME;
-import static com.tprealty.corporation.network.Constant.EMPTY;
-import static com.tprealty.corporation.network.Constant.PROJECT;
-import static com.tprealty.corporation.network.Constant.SUMMARY;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,8 +41,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         onNewIntent(getIntent());
 
-        TextView appBarTitle = findViewById(R.id.appBarTitle);
-        appBarTitle.setTypeface(Utils.fontBold(getAssets()));
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.app_name);
+        toolbar.setLogo(R.drawable.ic_tpcorp_24);
 
         tabLayout = findViewById(R.id.tabLayout);
         ViewPager viewPager = findViewById(R.id.viewPager);
